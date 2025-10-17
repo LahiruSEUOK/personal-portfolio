@@ -4,108 +4,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lahiru Sandeepa | Strategic Product Builder</title>
-    <!-- Chosen Palette: Dataviz Blue -->
-    <!-- Application Structure Plan: Retained the successful single-page dashboard structure but reimagined it with a "dark mode first" aesthetic. The flow is enhanced with on-scroll animations (fade-in, slide-up) to guide the user's focus and create a narrative journey through the CV. Interactive elements now have more pronounced hover effects (glows, lifts) to improve user feedback. A new "Key Skills" section with animated bars replaces the old chart for a more direct and scannable presentation. This structure was chosen to feel more like a modern tech portfolio, emphasizing dynamism and a high-end user experience. -->
-    <!-- Visualization & Content Choices: 
-        - Experience -> Show Change -> Animated Vertical Timeline -> On-scroll reveal, click to expand -> Creates a more engaging and less overwhelming way to explore a detailed career path -> HTML/Tailwind/JS.
-        - Skills -> Organize/Compare -> Animated Bar Chart -> Bars animate into view on scroll -> Visually impactful and easy to digest skill proficiencies -> Chart.js/Canvas.
-        - Education -> Inform -> Cards with on-scroll reveal -> Static but animates into view -> Modernizes the presentation of static information -> HTML/Tailwind/JS.
-        - Certifications -> Inform/Organize -> Grid of cards with on-scroll reveal -> Efficiently displays a large number of credentials -> HTML/Tailwind/JS.
-        - Projects -> Inform/Organize -> Cards with glow/lift hover effect -> Click for details -> Encourages interaction and provides depth without clutter -> HTML/Tailwind/JS.
-        All choices are designed to fit a modern, animated, dark-mode theme, prioritizing user engagement. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: FinTech Purple --><!-- Application Structure Plan: Inspired by the FinTech dashboard, this redesign merges the hero and skills sections into a single, high-impact "command center" view. The aesthetic is pure "glassmorphism" over a textured, dark background with aurora glows. The entire page is structured as a series of floating glass panels. Content is organized into a more dynamic "bento box" grid for projects and certifications to create visual interest. This moves the portfolio from a static page to an immersive, app-like experience. --><!-- Visualization & Content Choices: 
+        - Hero -> Inform/Excite -> A dedicated hero section with a typewriter animation for roles to immediately capture recruiter attention.
+        - Experience -> Show Change -> A completely redesigned horizontal, graphical roadmap inspired by modern tech timelines for a high-impact visual journey.
+        - Skills -> Organize/Compare -> A redesigned bar chart with background tracks and refined gradients, matching the provided inspiration image.
+        - Projects & Certifications -> Inform/Organize -> Asymmetrical "Bento Box" Grid -> Glass cards of varying sizes create a dynamic, modern layout. Project links are now styled as prominent buttons.
+        - Education -> Inform -> A clean grid of glassmorphic cards maintains theme consistency.
+        This redesign prioritizes a sophisticated, data-driven, and visually rich aesthetic with enhanced usability. --><!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. --><script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #0B1120; /* Deep Navy Blue */
-            --card-dark: #1C243B; /* Slightly Lighter Navy */
-            --text-dark-main: #E2E8F0; /* Light Grayish Blue */
-            --text-dark-secondary: #94A3B8; /* Slate Gray */
-            --accent: #38BDF8; /* Sky Blue */
-            --accent-hover: #7DD3FC; /* Lighter Sky Blue */
+            --bg-dark-primary: #0D1117;
+            --text-light-primary: #E6EDF3;
+            --text-light-secondary: #8B949E;
+            --accent-purple: #8A5CF5;
+            --accent-purple-light: #A885FD;
+            --accent-cyan: #39C0C7;
+            --border-color: rgba(139, 148, 158, 0.15);
+            --glass-bg: rgba(22, 27, 34, 0.5);
+            --track-bg: rgba(40, 45, 53, 0.5);
         }
         
-        /* Light mode can be defined here if needed, but we are focusing on dark mode */
-        html:not(.dark) {
-           --bg-primary: #F0F5FA;
-           --bg-card: #FFFFFF;
-           --text-main: #0B1120;
-           --text-secondary: #4A5568;
-        }
-
-        html.dark {
-            --bg-primary: var(--bg-dark);
-            --bg-card: var(--card-dark);
-            --text-main: var(--text-dark-main);
-            --text-secondary: var(--text-dark-secondary);
-        }
-
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-main);
-            transition: background-color 0.3s ease, color 0.3s ease;
+            background-color: var(--bg-dark-primary);
+            color: var(--text-light-primary);
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXVuZmaPe2iOjbGtrq2EhIaIiIqioiIeqRGqrq2UjZzn5+fLy8vNzc3JycmdnZ3o6OjR0dHW1tbV1dXa2trX19fg4ODj4+ParceAAAAAJXRSTMA+A8AAPj/APX+2An8/fnq5tjAw8PAwMDBw8DBw8DBw5eXl5eXl5cuAHbIAAABsElEQVR42uzV246DMAwF0AhdwgUe+97/f92IBBOg68eOa6kZg92Ie0E4l2m3vJdBjkl3N3Zg3L1f2/xP8p1YfCgSAHev4W9QLgJnsCAW/w/6s5K/R/5G/SP/Ef8Tf8R/xF8g/yJ/if8I/8R/hP/Cf8I/wj/B38DfyL/BX9D/in8F/w3/Gv8W/w3/Hv8W/wX/F/8X/xT/Fv8U/xL/FP8R/xL/Ef8Q/xD/CP8H/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/-1-2s=');
+            position: relative;
         }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at top right, rgba(138, 92, 245, 0.2), transparent 40%), radial-gradient(circle at bottom left, rgba(57, 192, 199, 0.2), transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+            animation: aurora 20s infinite linear;
+        }
+
+        @keyframes aurora {
+            0% { transform: rotate(0deg) scale(1.5); }
+            50% { transform: rotate(180deg) scale(2); }
+            100% { transform: rotate(360deg) scale(1.5); }
+        }
+
         .animated-section {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
         .animated-section.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        .timeline-item-content {
-            max-height: 0;
+        
+        .glass-card {
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease-in-out;
+            position: relative;
             overflow: hidden;
-            transition: max-height 0.5s ease-in-out;
         }
-        .timeline-item-content.open {
-            max-height: 500px;
-        }
-        .project-card:hover {
+        .glass-card:hover {
+            border-color: rgba(138, 92, 245, 0.5);
             transform: translateY(-5px);
-            box-shadow: 0 0 25px hsla(196, 94%, 60%, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .primary-button {
+            background: linear-gradient(to right, var(--accent-purple), var(--accent-purple-light));
+            color: white;
+            padding: 14px 28px;
+            border-radius: 9999px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(138, 92, 245, 0.3);
+            transition: all 0.3s ease-in-out;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .primary-button:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(138, 92, 245, 0.5);
+        }
+        .link-button {
+            background-color: var(--accent-purple);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        .link-button:hover {
+            background-color: var(--accent-purple-light);
         }
         .chart-container {
             position: relative; 
             height: 450px;
-            width:100%;
-            max-width: 600px;
-            margin: auto;
+            width: 100%;
         }
-        .bg-custom-dark { background-color: var(--bg-primary); }
-        .text-custom-main { color: var(--text-main); }
-        .bg-custom-card { background-color: var(--bg-card); }
-        .border-custom { border-color: #334155; } /* Slate 700 for borders */
-        .text-accent { color: var(--accent); }
-        .hover\:text-accent-hover:hover { color: var(--accent-hover); }
-        .bg-accent { background-color: var(--accent); }
-        .hover\:bg-accent-hover:hover { background-color: var(--accent-hover); }
-        .text-custom-secondary { color: var(--text-dark-secondary); }
-
+        .header-bg {
+            background-color: rgba(13, 17, 23, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .bento-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(6, 1fr);
+        }
+        .typewriter-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background-color: var(--accent-purple);
+            animation: blink 0.5s infinite;
+            margin-left: 4px;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
     </style>
 </head>
-<body class="antialiased bg-custom-dark text-custom-main">
+<body class="antialiased">
 
-    <header class="bg-card-dark/70 dark:bg-card-dark/70 backdrop-blur-lg fixed top-0 left-0 right-0 z-50">
+    <header class="header-bg fixed top-0 left-0 right-0 z-50">
         <div class="container mx-auto px-6 py-4">
             <nav class="flex items-center justify-between">
-                <h1 class="text-xl font-bold text-white">Lahiru Sandeepa</h1>
+                <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-accent-purple to-accent-cyan">Lahiru Sandeepa</h1>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#experience" class="text-custom-secondary hover:text-accent transition-colors">Experience</a>
-                    <a href="#skills" class="text-custom-secondary hover:text-accent transition-colors">Skills</a>
-                    <a href="#projects" class="text-custom-secondary hover:text-accent transition-colors">Projects</a>
-                    <a href="#education" class="text-custom-secondary hover:text-accent transition-colors">Education</a>
-                    <a href="#certifications" class="text-custom-secondary hover:text-accent transition-colors">Certifications</a>
+                    <a href="#experience" class="text-light-secondary hover:text-white transition-colors">Experience</a>
+                    <a href="#skills" class="text-light-secondary hover:text-white transition-colors">Skills</a>
+                    <a href="#projects" class="text-light-secondary hover:text-white transition-colors">Projects</a>
+                    <a href="#education" class="text-light-secondary hover:text-white transition-colors">Education</a>
+                    <a href="#certifications" class="text-light-secondary hover:text-white transition-colors">Certifications</a>
                 </div>
-                <button id="theme-toggle" class="p-2 rounded-full text-custom-secondary hover:text-accent hover:bg-slate-700 transition-colors">
-                    <span id="theme-icon">🌙</span>
-                </button>
             </nav>
         </div>
     </header>
@@ -113,52 +158,70 @@
     <main class="pt-24">
         <div class="container mx-auto px-6">
             
-            <section id="hero" class="text-center py-20 animated-section">
-                <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight">Strategic Product Builder</h2>
-                <p class="mt-6 max-w-3xl mx-auto text-lg text-custom-secondary">Solving complex real-world challenges with smart, scalable, and user-centric software solutions. From ideation to deployment, I build products that deliver value.</p>
-                <a href="mailto:lahirusandeepa22@gmail.com" class="mt-8 inline-block bg-accent text-white font-semibold px-8 py-3 rounded-lg hover:bg-accent-hover transition-transform transform hover:scale-105">Get In Touch</a>
-            </section>
-
-            <section id="experience" class="py-20 animated-section">
-                <h3 class="text-3xl font-bold text-center mb-16">Career Journey</h3>
-                <div class="relative max-w-3xl mx-auto">
-                    <div class="absolute left-3 md:left-1/2 md:-translate-x-1/2 h-full w-0.5 bg-custom-card"></div>
-                    <div id="timeline-container" class="space-y-12"></div>
-                </div>
-            </section>
-            
-            <section id="skills" class="py-20 animated-section">
-                <h3 class="text-3xl font-bold text-center mb-4">Core Competencies</h3>
-                 <p class="text-center text-custom-secondary max-w-2xl mx-auto mb-12">A visual breakdown of my expertise across management, technical, and business domains.</p>
-                <div class="bg-custom-card p-8 rounded-2xl">
-                    <div class="chart-container">
-                        <canvas id="skillsChart"></canvas>
+            <section id="hero" class="py-20 animated-section text-center">
+                 <div class="glass-card max-w-4xl mx-auto p-8 md:p-12">
+                    <h1 class="text-4xl lg:text-6xl font-extrabold tracking-tight">Lahiru Sandeepa</h1>
+                    <div class="h-12 mt-4">
+                        <span id="role-text" class="text-xl lg:text-2xl text-accent-purple font-semibold"></span><span class="typewriter-cursor"></span>
+                    </div>
+                    <p class="mt-4 text-lg max-w-2xl mx-auto text-light-secondary">A dynamic leader who transforms complex business challenges into elegant, high-impact software solutions. I build, lead, and deliver with precision.</p>
+                    <div class="mt-8">
+                        <a href="mailto:lahirusandeepa22@gmail.com" class="primary-button magnetic-button">Get In Touch</a>
                     </div>
                 </div>
             </section>
 
-            <section id="projects" class="py-20 animated-section">
-                <h3 class="text-3xl font-bold text-center mb-12">Flagship Projects</h3>
-                <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-            </section>
+            <div class="space-y-24">
+                <section id="experience" class="animated-section">
+                    <h3 class="text-3xl font-bold text-center mb-16 text-light-primary">💼 Career Roadmap</h3>
+                    <div class="relative max-w-3xl mx-auto">
+                        <div class="absolute left-3 md:left-1/2 md:-translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-accent-purple to-accent-cyan opacity-30"></div>
+                        <div id="timeline-container" class="space-y-8"></div>
+                    </div>
+                </section>
+                
+                <section id="skills" class="animated-section">
+                    <h3 class="text-3xl font-bold text-center mb-12 text-light-primary">🧠 Core Competencies</h3>
+                    <div class="glass-card max-w-4xl mx-auto p-8">
+                        <div class="chart-container" style="height: 450px;">
+                            <canvas id="skillsChart"></canvas>
+                        </div>
+                    </div>
+                </section>
 
-            <section id="education" class="py-20 animated-section">
-                <h3 class="text-3xl font-bold text-center mb-12">Education</h3>
-                <div id="education-container" class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-            </section>
-            
-            <section id="certifications" class="py-20 animated-section">
-                <h3 class="text-3xl font-bold text-center mb-12">Licenses & Certifications</h3>
-                <div id="certifications-container" class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-            </section>
+                <section id="projects" class="animated-section">
+                    <h3 class="text-3xl font-bold text-center mb-12 text-light-primary">🚀 Flagship Projects</h3>
+                    <div id="projects-container" class="bento-grid"></div>
+                </section>
+
+                <section id="education" class="animated-section">
+                    <h3 class="text-3xl font-bold text-center mb-12 text-light-primary">🎓 Education</h3>
+                    <div id="education-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+                </section>
+                
+                <section id="certifications" class="animated-section">
+                    <h3 class="text-3xl font-bold text-center mb-12 text-light-primary">🏆 Licenses & Certifications</h3>
+                    <div id="certifications-container" class="bento-grid"></div>
+                </section>
+
+                <section id="cta" class="animated-section text-center py-20">
+                    <div class="glass-card max-w-3xl mx-auto p-8 md:p-12">
+                        <h3 class="text-3xl font-bold">🤝 Let's Connect</h3>
+                        <p class="mt-4 text-light-secondary">I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious team. Let's build the future together.</p>
+                        <div class="mt-8">
+                            <a href="mailto:lahirusandeepa22@gmail.com" class="primary-button magnetic-button">Say Hello</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
 
         </div>
     </main>
 
-    <footer class="bg-custom-dark border-t border-custom">
-        <div class="container mx-auto px-6 py-8 text-center text-custom-secondary">
+    <footer class="mt-16 border-t" style="border-color: var(--border-color);">
+        <div class="container mx-auto px-6 py-8 text-center text-light-secondary">
             <p>&copy; 2025 Lahiru Sandeepa. All rights reserved.</p>
-            <p class="mt-2">Built with passion and deployed on GitHub Pages.</p>
+            <p class="mt-2 text-sm">Designed with inspiration from modern FinTech UI.</p>
         </div>
     </footer>
 
@@ -166,18 +229,18 @@
     document.addEventListener('DOMContentLoaded', function() {
         const experienceData = [
             { role: 'Project Manager', company: 'Cenzios', date: 'Mar 2025 - Present', details: ['Lead cross-functional teams to deliver end-to-end software solutions.', 'Manage complex IT and business projects from inception to completion.', 'Translate business requirements into actionable technical solutions.', 'Apply Agile, Waterfall, and Hybrid methodologies to optimize project execution.'] },
-            { role: 'Founder', company: 'Safer Technologies', date: 'Jan 2044 - Present', details: ['Founded a side venture to deliver custom software solutions and IT services.', 'Help businesses leverage innovative and secure technology to solve real problems.'] },
+            { role: 'Founder', company: 'Safer Technologies', date: 'Jan 2024 - Present', details: ['Founded a side venture to deliver custom software solutions and IT services.', 'Help businesses leverage innovative and secure technology to solve real problems.'] },
             { role: 'Associate Project Manager', company: 'Aventure IT', date: 'Oct 2024 - Mar 2025', details: ['Led project planning and execution for various client projects.', 'Managed resource allocation and ensured optimal team performance using JIRA.', 'Conducted risk management and financial planning.'] },
             { role: 'Business Development Manager', company: 'Our Nation PVT Ltd', date: 'Oct 2022 - Oct 2024', details: ['Managed sales, marketing, and business enhancement for a multi-location business with 25+ staff.', 'Responsible for risk management, financial planning, and resource allocation.'] },
             { role: 'President, SESA', company: 'University of Kelaniya', date: 'Jul 2022 - Jul 2023', details: ['Led one of the most active student bodies in the Faculty of Science.', 'Organized the largest 24-hour inter-university hackathon (Realhack).', 'Managed event planning, fundraising, and sponsor relations for a multi-million budget.'] },
             { role: 'Business Analyst Intern', company: 'ELZIAN AGRO', date: 'Sep 2021 - Feb 2022', details: ['Bridged the gap between business needs and technological solutions in the agribusiness sector.', 'Managed stakeholder communication, requirements elicitation, and documentation.'] },
-            { role: 'Sales Manager', company: 'AIA Sri Lanka', date: 'Feb 2019 - Sep 2021', details: ['Gained promotion through high performance and commitment.', 'Developed leadership, recruiting, teamwork, and mentoring skills while studying.'] }
+            { role: 'Sales Manager & Executive', company: 'AIA Sri Lanka', date: 'Apr 2018 - Sep 2021', details: ['Gained promotion through high performance and commitment.', 'Developed leadership, recruiting, teamwork, and mentoring skills while studying.'] }
         ];
 
         const projectsData = [
-            { title: 'Workflow Supervision System (FlowSuite)', link: 'https://flowsuite.web.cenzios.com/', content: '<p>Designed a comprehensive end-to-end solution for a manufacturing client to manage complex cross-departmental workflows, reducing production cycle time by 75% and increasing task visibility by 90%.</p>' },
-            { title: 'Cenzios Learning Management System', link: 'https://learner.cenzios.com/', content: '<p>Led the design of a full-scale LMS for educational institutes, projected to reduce administrative overhead by 80% and improve enrollment processing time by 75%.</p>' },
-            { title: 'Realhack Hackathon', content: '<p>As President of SESA, I led the organization of Realhack, the largest 24-hour physical inter-university hackathon in Sri Lanka, securing sponsorships over millions and coordinating hundreds of participants.</p>'}
+            { title: 'Workflow Supervision System (FlowSuite)', link: 'https://flowsuite.web.cenzios.com/', content: 'A comprehensive solution for manufacturing clients to manage cross-departmental workflows.', size: 'col-span-6 md:col-span-4 row-span-2' },
+            { title: 'Cenzios Learning Management System', link: 'https://learner.cenzios.com/', content: 'A full-scale LMS for educational institutes to reduce administrative overhead.', size: 'col-span-6 md:col-span-2 row-span-2' },
+            { title: 'Realhack Hackathon', content: 'Organized the largest 24-hour physical inter-university hackathon in Sri Lanka.', size: 'col-span-6' }
         ];
 
         const educationData = [
@@ -187,93 +250,73 @@
         ];
         
         const certificationsData = [
-            { title: 'The Business Plan', issuer: 'Alison', date: 'Oct 2025' },
-            { title: 'Comprehensive Guide to Software Architecture', issuer: 'Alison', date: 'Sep 2025' },
-            { title: 'Agile Scrum Master', issuer: 'Simplilearn', date: 'Sep 2024' },
-            { title: 'Communication Skills', issuer: 'SLASSCOM', date: 'Sep 2024' },
-            { title: 'Introduction to Prompt Engineering', issuer: 'Simplilearn', date: 'Sep 2024' },
-            { title: 'Leadership', issuer: 'SLASSCOM', date: 'Sep 2024' },
-            { title: 'Microsoft .NET Fundamentals', issuer: 'Great Learning', date: 'Sep 2024' },
-            { title: 'Navigate Global Business Ecosystem', issuer: 'SLASSCOM', date: 'Sep 2024' },
-            { title: 'Self-awareness and Emotional Intelligence', issuer: 'SLASSCOM', date: 'Sep 2024' },
-            { title: 'Trust Building', issuer: 'SLASSCOM', date: 'Sep 2024' },
-            { title: 'Generative AI Overview for Project Managers', issuer: 'Project Management Institute', date: 'Aug 2024' },
-            { title: 'Introduction to Basics of Disciplined Agile™', issuer: 'Project Management Institute', date: 'Aug 2024' },
-            { title: 'Jira Fundamentals', issuer: 'Atlassian', date: 'Aug 2024' },
-            { title: 'PRINCE2 Certification Preparation', issuer: 'Alison', date: 'Aug 2024' },
-            { title: 'Projects in Controlled Environments', issuer: 'Alison', date: 'Aug 2024' },
-            { title: 'Software Development Lifecycle Fundamentals', issuer: 'Great Learning', date: 'Aug 2024' },
-            { title: 'Taming Bias: Using Wicked Problem Solving', issuer: 'Project Management Institute', date: 'Aug 2024' },
-            { title: 'The Basics of Scrum', issuer: 'Project Management Institute', date: 'Aug 2024' },
-            { title: 'Facebook Marketing', issuer: 'Simplebooks', date: 'May 2024' },
-            { title: 'Operating Systems - Intro to Scheduling', issuer: 'Alison', date: 'Sep 2020' }
+            { title: 'Agile Scrum Master', issuer: 'Simplilearn', date: 'Sep 2024', size: 'col-span-3 md:col-span-2' },
+            { title: 'Comprehensive Guide to Software Architecture', issuer: 'Alison', date: 'Sep 2025', size: 'col-span-3 md:col-span-2' },
+            { title: 'Generative AI for Project Managers', issuer: 'PMI', date: 'Aug 2024', size: 'col-span-3 md:col-span-2' },
+            { title: 'Jira Fundamentals', issuer: 'Atlassian', date: 'Aug 2024', size: 'col-span-3 md:col-span-2' },
+            { title: 'The Business Plan', issuer: 'Alison', date: 'Oct 2025', size: 'col-span-3 md:col-span-2' },
+            { title: 'Leadership', issuer: 'SLASSCOM', date: 'Sep 2024', size: 'col-span-3 md:col-span-2' },
+            { title: 'Communication Skills', issuer: 'SLASSCOM', date: 'Sep 2024', size: 'col-span-2' },
+            { title: 'Intro to Prompt Engineering', issuer: 'Simplilearn', date: 'Sep 2024', size: 'col-span-2' },
+            { title: '.NET Fundamentals', issuer: 'Great Learning', date: 'Sep 2024', size: 'col-span-2' },
+            { title: 'Navigate Global Business Ecosystem', issuer: 'SLASSCOM', date: 'Sep 2024', size: 'col-span-2' },
+            { title: 'Emotional Intelligence', issuer: 'SLASSCOM', date: 'Sep 2024', size: 'col-span-2' },
+            { title: 'Trust Building', issuer: 'SLASSCOM', date: 'Sep 2024', size: 'col-span-2' },
+            { title: 'Basics of Disciplined Agile™', issuer: 'PMI', date: 'Aug 2024', size: 'col-span-2' },
+            { title: 'PRINCE2 Preparation', issuer: 'Alison', date: 'Aug 2024', size: 'col-span-2' },
+            { title: 'Projects in Controlled Environments', issuer: 'Alison', date: 'Aug 2024', size: 'col-span-2' },
+            { title: 'SDLC Fundamentals', issuer: 'Great Learning', date: 'Aug 2024', size: 'col-span-3' },
+            { title: 'Taming Bias: Using Wicked Problem Solving', issuer: 'PMI', date: 'Aug 2024', size: 'col-span-3' },
+            { title: 'The Basics of Scrum', issuer: 'PMI', date: 'Aug 2024', size: 'col-span-2' },
+            { title: 'Facebook Marketing', issuer: 'Simplebooks', date: 'May 2024', size: 'col-span-2' },
+            { title: 'Operating Systems - Scheduling', issuer: 'Alison', date: 'Sep 2020', size: 'col-span-2' }
         ];
 
         const timelineContainer = document.getElementById('timeline-container');
         experienceData.forEach((item, index) => {
-            const isLeft = index % 2 === 0;
             const timelineItem = document.createElement('div');
-            timelineItem.className = `relative flex items-start md:justify-center md:space-x-8`;
+            timelineItem.className = `relative md:flex items-start md:space-x-8 ${index % 2 === 0 ? 'md:flex-row-reverse md:space-x-reverse' : ''}`;
+            
             const contentBlock = `
-                <div class="bg-custom-card w-full p-4 rounded-lg border border-custom shadow-lg cursor-pointer timeline-item-header">
-                    <p class="text-sm text-accent font-medium">${item.date}</p>
-                    <h4 class="font-bold text-white">${item.role}</h4>
-                    <p class="text-custom-secondary">${item.company}</p>
-                    <div class="timeline-item-content">
-                        <ul class="mt-3 text-sm text-custom-secondary list-disc list-inside space-y-1">
-                            ${item.details.map(d => `<li>${d}</li>`).join('')}
-                        </ul>
-                    </div>
+                <div class="glass-card w-full p-6 cursor-pointer">
+                    <p class="text-sm font-semibold" style="color: var(--accent-purple);">${item.date}</p>
+                    <h4 class="font-bold text-lg mt-1">${item.role}</h4>
+                    <p class="text-light-secondary">${item.company}</p>
                 </div>
             `;
+            
             timelineItem.innerHTML = `
-                <div class="hidden md:block w-1/2 ${isLeft ? 'text-right' : ''}">${isLeft ? contentBlock : ''}</div>
-                <div class="absolute md:relative left-3 md:left-auto top-2 md:top-auto z-10">
-                    <div class="w-1 h-1 bg-accent ring-4 ring-accent/30 rounded-full"></div>
+                <div class="md:w-1/2">${contentBlock}</div>
+                <div class="hidden md:flex absolute top-6 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-dark-primary items-center justify-center">
+                    <div class="w-4 h-4 rounded-full" style="background-color: var(--accent-purple);"></div>
                 </div>
-                <div class="ml-10 md:ml-0 md:w-1/2 ${!isLeft ? 'text-left' : ''}">${!isLeft ? contentBlock : ''}</div>
+                <div class="md:w-1/2"></div>
             `;
             timelineContainer.appendChild(timelineItem);
-        });
-        
-        document.querySelectorAll('.timeline-item-header').forEach(header => {
-            header.addEventListener('click', () => {
-                header.querySelector('.timeline-item-content').classList.toggle('open');
-            });
         });
 
         const projectsContainer = document.getElementById('projects-container');
         projectsData.forEach((project) => {
             const cardContent = `
-                <h4 class="text-xl font-bold text-white">${project.title}</h4>
-                <div class="text-custom-secondary mt-2">${project.content}</div>
-                ${project.link ? `<span class="inline-block mt-4 text-sm font-semibold text-accent hover:text-accent-hover">View Live Site →</span>` : ''}
+                <h4 class="text-xl font-bold">${project.title}</h4>
+                <div class="mt-2 text-light-secondary">${project.content}</div>
+                ${project.link ? `<div class="mt-4"><a href="${project.link}" target="_blank" rel="noopener noreferrer" class="link-button inline-block">View Live Site →</a></div>` : ''}
             `;
-            if (project.link) {
-                const link = document.createElement('a');
-                link.href = project.link;
-                link.target = '_blank';
-                link.rel = 'noopener noreferrer';
-                link.className = 'block project-card bg-custom-card p-6 rounded-lg border border-custom transition-all duration-300';
-                link.innerHTML = cardContent;
-                projectsContainer.appendChild(link);
-            } else {
-                const card = document.createElement('div');
-                card.className = 'bg-custom-card p-6 rounded-lg border border-custom transition-all duration-300';
-                card.innerHTML = cardContent;
-                projectsContainer.appendChild(card);
-            }
+            const cardWrapper = document.createElement('div');
+            cardWrapper.className = `glass-card p-6 flex flex-col justify-between ${project.size}`;
+            cardWrapper.innerHTML = cardContent;
+            projectsContainer.appendChild(cardWrapper);
         });
 
         const educationContainer = document.getElementById('education-container');
         educationData.forEach(edu => {
             const card = document.createElement('div');
-            card.className = 'bg-custom-card p-6 rounded-lg border border-custom';
+            card.className = 'glass-card p-6 h-full';
             card.innerHTML = `
-                <h4 class="font-bold text-white">${edu.degree}</h4>
-                <p class="text-accent">${edu.field}</p>
-                <p class="text-custom-secondary mt-1">${edu.university}</p>
-                <p class="text-sm text-slate-500">${edu.date}</p>
+                <h4 class="font-bold">${edu.degree}</h4>
+                <p style="color: var(--accent-purple);">${edu.field}</p>
+                <p class="mt-1 text-light-secondary">${edu.university}</p>
+                <p class="text-sm text-light-secondary">${edu.date}</p>
             `;
             educationContainer.appendChild(card);
         });
@@ -281,38 +324,33 @@
         const certificationsContainer = document.getElementById('certifications-container');
         certificationsData.forEach(cert => {
             const card = document.createElement('div');
-            card.className = 'bg-custom-card p-4 rounded-lg border border-custom';
+            card.className = `glass-card p-4 flex flex-col justify-center text-center ${cert.size}`;
             card.innerHTML = `
-                <h4 class="font-semibold text-white">${cert.title}</h4>
-                <p class="text-custom-secondary text-sm">${cert.issuer}</p>
-                <p class="text-xs text-slate-500 mt-1">${cert.date}</p>
+                <h4 class="font-semibold">${cert.title}</h4>
+                <p class="text-sm text-light-secondary">${cert.issuer}</p>
+                <p class="text-xs mt-1 text-light-secondary">${cert.date}</p>
             `;
             certificationsContainer.appendChild(card);
         });
 
         const skillsCtx = document.getElementById('skillsChart').getContext('2d');
+        const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-light-primary').trim();
         new Chart(skillsCtx, {
             type: 'bar',
             data: {
                 labels: ['Agile Project Management', 'Solution Architecture', 'Team & Stakeholder Mgmt', 'Business Development', 'Software Design', 'Financial Planning'],
                 datasets: [{
-                    label: 'Proficiency',
                     data: [95, 90, 92, 85, 88, 80],
                     backgroundColor: function(context) {
-                        const chart = context.chart;
-                        const {ctx, chartArea} = chart;
-                        if (!chartArea) {
-                            return null;
-                        }
-                        const gradient = ctx.createLinearGradient(chartArea.left, 0, chartArea.right, 0);
-                        gradient.addColorStop(0, 'rgba(56, 189, 248, 0.7)');
-                        gradient.addColorStop(0.9, 'rgba(56, 189, 248, 0.1)');
+                        const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, context.chart.height);
+                        gradient.addColorStop(0, 'rgba(138, 92, 245, 0.8)');
+                        gradient.addColorStop(1, 'rgba(57, 192, 199, 0.8)');
                         return gradient;
                     },
-                    borderColor: 'rgba(56, 189, 248, 1)',
+                    borderColor: 'var(--border-color)',
                     borderWidth: 1,
                     borderRadius: 4,
-                    barPercentage: 0.5,
+                    barPercentage: 0.6,
                 }]
             },
             options: {
@@ -320,9 +358,9 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    x: { display: false, min: 60 },
+                    x: { display: false, min: 50 },
                     y: {
-                        ticks: { color: getComputedStyle(document.documentElement).getPropertyValue('--text-dark-secondary').trim(), font: { size: 14 } },
+                        ticks: { color: textColor, font: { size: 14, weight: '500' } },
                         grid: { display: false }
                     }
                 },
@@ -331,41 +369,68 @@
                     tooltip: { enabled: false }
                 },
                  animation: {
-                    duration: 1000,
-                    easing: 'easeInOutQuart'
+                    duration: 1500,
+                    easing: 'easeOutCubic'
                 }
             }
         });
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
+                    const delay = index * 100;
+                    entry.target.style.transitionDelay = `${delay}ms`;
                     entry.target.classList.add('visible');
                 }
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.animated-section').forEach(section => observer.observe(section));
         
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
-        const htmlEl = document.documentElement;
+        const magneticButtons = document.querySelectorAll('.magnetic-button');
+        magneticButtons.forEach(btn => {
+            btn.addEventListener('mousemove', function(e) {
+                const { offsetX, offsetY, target } = e;
+                const { clientWidth, clientHeight } = target;
+                const x = (offsetX / clientWidth) * 40 - 20;
+                const y = (offsetY / clientHeight) * 40 - 20;
+                target.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+                target.style.transition = 'transform 0.1s ease';
+            });
 
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        htmlEl.classList.add(savedTheme);
-        themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-
-        themeToggle.addEventListener('click', () => {
-            if (htmlEl.classList.contains('dark')) {
-                htmlEl.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-                themeIcon.textContent = '🌙';
-            } else {
-                htmlEl.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-                themeIcon.textContent = '☀️';
-            }
-            location.reload(); 
+            btn.addEventListener('mouseleave', function(e) {
+                e.target.style.transform = 'translate(0, 0) scale(1)';
+                e.target.style.transition = 'transform 0.3s ease';
+            });
         });
+
+
+        const roles = ["PROJECT MANAGER", "PRODUCT MANAGER", "SOLUTION DESIGNER", "AGILE LEADER"];
+        let roleIndex = 0;
+        let charIndex = 0;
+        const roleTextElement = document.getElementById('role-text');
+
+        function typeRole() {
+            if (charIndex < roles[roleIndex].length) {
+                roleTextElement.textContent += roles[roleIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(typeRole, 100);
+            } else {
+                setTimeout(deleteRole, 2000);
+            }
+        }
+
+        function deleteRole() {
+            if (charIndex > 0) {
+                roleTextElement.textContent = roles[roleIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(deleteRole, 50);
+            } else {
+                roleIndex = (roleIndex + 1) % roles.length;
+                setTimeout(typeRole, 500);
+            }
+        }
+        
+        typeRole();
     });
     </script>
 </body>
