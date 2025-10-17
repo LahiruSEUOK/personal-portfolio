@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lahiru Sandeepa | Strategic Product Builder</title>
-    <!-- Chosen Palette: Midnight Cyber -->
+    <!-- Chosen Palette: Dataviz Blue -->
     <!-- Application Structure Plan: Retained the successful single-page dashboard structure but reimagined it with a "dark mode first" aesthetic. The flow is enhanced with on-scroll animations (fade-in, slide-up) to guide the user's focus and create a narrative journey through the CV. Interactive elements now have more pronounced hover effects (glows, lifts) to improve user feedback. A new "Key Skills" section with animated bars replaces the old chart for a more direct and scannable presentation. This structure was chosen to feel more like a modern tech portfolio, emphasizing dynamism and a high-end user experience. -->
     <!-- Visualization & Content Choices: 
         - Experience -> Show Change -> Animated Vertical Timeline -> On-scroll reveal, click to expand -> Creates a more engaging and less overwhelming way to explore a detailed career path -> HTML/Tailwind/JS.
         - Skills -> Organize/Compare -> Animated Bar Chart -> Bars animate into view on scroll -> Visually impactful and easy to digest skill proficiencies -> Chart.js/Canvas.
         - Education -> Inform -> Cards with on-scroll reveal -> Static but animates into view -> Modernizes the presentation of static information -> HTML/Tailwind/JS.
         - Certifications -> Inform/Organize -> Grid of cards with on-scroll reveal -> Efficiently displays a large number of credentials -> HTML/Tailwind/JS.
-        - Projects -> Inform/Organize -> Cards with glow/lift hover effect & modal -> Click for details -> Encourages interaction and provides depth without clutter -> HTML/Tailwind/JS.
+        - Projects -> Inform/Organize -> Cards with glow/lift hover effect -> Click for details -> Encourages interaction and provides depth without clutter -> HTML/Tailwind/JS.
         All choices are designed to fit a modern, animated, dark-mode theme, prioritizing user engagement. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -21,29 +21,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #0f172a;
-            --bg-light: #f1f5f9;
-            --card-dark: #1e293b;
-            --card-light: #ffffff;
-            --text-dark-main: #f8fafc;
-            --text-dark-secondary: #94a3b8;
-            --text-light-main: #0f172a;
-            --text-light-secondary: #475569;
-            --accent: #22d3ee;
-            --accent-hover: #67e8f9;
+            --bg-dark: #0B1120; /* Deep Navy Blue */
+            --card-dark: #1C243B; /* Slightly Lighter Navy */
+            --text-dark-main: #E2E8F0; /* Light Grayish Blue */
+            --text-dark-secondary: #94A3B8; /* Slate Gray */
+            --accent: #38BDF8; /* Sky Blue */
+            --accent-hover: #7DD3FC; /* Lighter Sky Blue */
         }
+        
+        /* Light mode can be defined here if needed, but we are focusing on dark mode */
+        html:not(.dark) {
+           --bg-primary: #F0F5FA;
+           --bg-card: #FFFFFF;
+           --text-main: #0B1120;
+           --text-secondary: #4A5568;
+        }
+
         html.dark {
             --bg-primary: var(--bg-dark);
             --bg-card: var(--card-dark);
             --text-main: var(--text-dark-main);
             --text-secondary: var(--text-dark-secondary);
         }
-        html:not(.dark) {
-            --bg-primary: var(--bg-light);
-            --bg-card: var(--card-light);
-            --text-main: var(--text-light-main);
-            --text-secondary: var(--text-light-secondary);
-        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-primary);
@@ -67,63 +67,70 @@
         .timeline-item-content.open {
             max-height: 500px;
         }
-        .modal {
-            transition: opacity 0.3s ease;
-        }
         .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(34, 211, 238, 0.3);
+            box-shadow: 0 0 25px hsla(196, 94%, 60%, 0.3);
         }
         .chart-container {
             position: relative; 
-            height: 400px;
+            height: 450px;
             width:100%;
-            max-width: 500px;
+            max-width: 600px;
             margin: auto;
         }
+        .bg-custom-dark { background-color: var(--bg-primary); }
+        .text-custom-main { color: var(--text-main); }
+        .bg-custom-card { background-color: var(--bg-card); }
+        .border-custom { border-color: #334155; } /* Slate 700 for borders */
+        .text-accent { color: var(--accent); }
+        .hover\:text-accent-hover:hover { color: var(--accent-hover); }
+        .bg-accent { background-color: var(--accent); }
+        .hover\:bg-accent-hover:hover { background-color: var(--accent-hover); }
+        .text-custom-secondary { color: var(--text-dark-secondary); }
+
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased bg-custom-dark text-custom-main">
 
-    <header class="bg-white/10 dark:bg-slate-900/50 backdrop-blur-lg fixed top-0 left-0 right-0 z-50">
+    <header class="bg-card-dark/70 dark:bg-card-dark/70 backdrop-blur-lg fixed top-0 left-0 right-0 z-50">
         <div class="container mx-auto px-6 py-4">
             <nav class="flex items-center justify-between">
                 <h1 class="text-xl font-bold text-white">Lahiru Sandeepa</h1>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#experience" class="text-slate-300 hover:text-cyan-400 transition-colors">Experience</a>
-                    <a href="#skills" class="text-slate-300 hover:text-cyan-400 transition-colors">Skills</a>
-                    <a href="#projects" class="text-slate-300 hover:text-cyan-400 transition-colors">Projects</a>
-                    <a href="#education" class="text-slate-300 hover:text-cyan-400 transition-colors">Education</a>
-                    <a href="#certifications" class="text-slate-300 hover:text-cyan-400 transition-colors">Certifications</a>
+                    <a href="#experience" class="text-custom-secondary hover:text-accent transition-colors">Experience</a>
+                    <a href="#skills" class="text-custom-secondary hover:text-accent transition-colors">Skills</a>
+                    <a href="#projects" class="text-custom-secondary hover:text-accent transition-colors">Projects</a>
+                    <a href="#education" class="text-custom-secondary hover:text-accent transition-colors">Education</a>
+                    <a href="#certifications" class="text-custom-secondary hover:text-accent transition-colors">Certifications</a>
                 </div>
-                <button id="theme-toggle" class="p-2 rounded-full text-slate-300 hover:text-cyan-400 hover:bg-slate-700 transition-colors">
+                <button id="theme-toggle" class="p-2 rounded-full text-custom-secondary hover:text-accent hover:bg-slate-700 transition-colors">
                     <span id="theme-icon">🌙</span>
                 </button>
             </nav>
         </div>
     </header>
 
-    <main class="pt-24 bg-slate-900 text-white">
+    <main class="pt-24">
         <div class="container mx-auto px-6">
             
             <section id="hero" class="text-center py-20 animated-section">
                 <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight">Strategic Product Builder</h2>
-                <p class="mt-6 max-w-3xl mx-auto text-lg text-slate-400">Solving complex real-world challenges with smart, scalable, and user-centric software solutions. From ideation to deployment, I build products that deliver value.</p>
-                <a href="mailto:lahirusandeepa22@gmail.com" class="mt-8 inline-block bg-cyan-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-cyan-400 transition-transform transform hover:scale-105">Get In Touch</a>
+                <p class="mt-6 max-w-3xl mx-auto text-lg text-custom-secondary">Solving complex real-world challenges with smart, scalable, and user-centric software solutions. From ideation to deployment, I build products that deliver value.</p>
+                <a href="mailto:lahirusandeepa22@gmail.com" class="mt-8 inline-block bg-accent text-white font-semibold px-8 py-3 rounded-lg hover:bg-accent-hover transition-transform transform hover:scale-105">Get In Touch</a>
             </section>
 
             <section id="experience" class="py-20 animated-section">
                 <h3 class="text-3xl font-bold text-center mb-16">Career Journey</h3>
                 <div class="relative max-w-3xl mx-auto">
-                    <div class="absolute left-3 md:left-1/2 md:-translate-x-1/2 h-full w-0.5 bg-slate-700"></div>
+                    <div class="absolute left-3 md:left-1/2 md:-translate-x-1/2 h-full w-0.5 bg-custom-card"></div>
                     <div id="timeline-container" class="space-y-12"></div>
                 </div>
             </section>
             
             <section id="skills" class="py-20 animated-section">
                 <h3 class="text-3xl font-bold text-center mb-4">Core Competencies</h3>
-                 <p class="text-center text-slate-400 max-w-2xl mx-auto mb-12">A visual breakdown of my expertise across management, technical, and business domains.</p>
-                <div class="bg-slate-800 p-8 rounded-2xl">
+                 <p class="text-center text-custom-secondary max-w-2xl mx-auto mb-12">A visual breakdown of my expertise across management, technical, and business domains.</p>
+                <div class="bg-custom-card p-8 rounded-2xl">
                     <div class="chart-container">
                         <canvas id="skillsChart"></canvas>
                     </div>
@@ -132,12 +139,12 @@
 
             <section id="projects" class="py-20 animated-section">
                 <h3 class="text-3xl font-bold text-center mb-12">Flagship Projects</h3>
-                <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+                <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
             </section>
 
             <section id="education" class="py-20 animated-section">
                 <h3 class="text-3xl font-bold text-center mb-12">Education</h3>
-                <div id="education-container" class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+                <div id="education-container" class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
             </section>
             
             <section id="certifications" class="py-20 animated-section">
@@ -148,30 +155,18 @@
         </div>
     </main>
 
-    <footer class="bg-slate-900 border-t border-slate-800">
-        <div class="container mx-auto px-6 py-8 text-center text-slate-400">
+    <footer class="bg-custom-dark border-t border-custom">
+        <div class="container mx-auto px-6 py-8 text-center text-custom-secondary">
             <p>&copy; 2025 Lahiru Sandeepa. All rights reserved.</p>
             <p class="mt-2">Built with passion and deployed on GitHub Pages.</p>
         </div>
     </footer>
-    
-    <div id="project-modal" class="modal fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none">
-        <div class="bg-slate-800 border border-slate-700 rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
-            <div class="p-6">
-                <div class="flex justify-between items-start mb-4">
-                    <h3 id="modal-title" class="text-2xl font-bold text-white"></h3>
-                    <button id="modal-close-btn" class="text-3xl text-slate-400 hover:text-white">&times;</button>
-                </div>
-                <div id="modal-content" class="text-slate-300 space-y-4"></div>
-            </div>
-        </div>
-    </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const experienceData = [
             { role: 'Project Manager', company: 'Cenzios', date: 'Mar 2025 - Present', details: ['Lead cross-functional teams to deliver end-to-end software solutions.', 'Manage complex IT and business projects from inception to completion.', 'Translate business requirements into actionable technical solutions.', 'Apply Agile, Waterfall, and Hybrid methodologies to optimize project execution.'] },
-            { role: 'Founder', company: 'Safer Technologies', date: 'Jan 2024 - Present', details: ['Founded a side venture to deliver custom software solutions and IT services.', 'Help businesses leverage innovative and secure technology to solve real problems.'] },
+            { role: 'Founder', company: 'Safer Technologies', date: 'Jan 2044 - Present', details: ['Founded a side venture to deliver custom software solutions and IT services.', 'Help businesses leverage innovative and secure technology to solve real problems.'] },
             { role: 'Associate Project Manager', company: 'Aventure IT', date: 'Oct 2024 - Mar 2025', details: ['Led project planning and execution for various client projects.', 'Managed resource allocation and ensured optimal team performance using JIRA.', 'Conducted risk management and financial planning.'] },
             { role: 'Business Development Manager', company: 'Our Nation PVT Ltd', date: 'Oct 2022 - Oct 2024', details: ['Managed sales, marketing, and business enhancement for a multi-location business with 25+ staff.', 'Responsible for risk management, financial planning, and resource allocation.'] },
             { role: 'President, SESA', company: 'University of Kelaniya', date: 'Jul 2022 - Jul 2023', details: ['Led one of the most active student bodies in the Faculty of Science.', 'Organized the largest 24-hour inter-university hackathon (Realhack).', 'Managed event planning, fundraising, and sponsor relations for a multi-million budget.'] },
@@ -180,8 +175,8 @@
         ];
 
         const projectsData = [
-            { title: 'Workflow Supervision System (FlowSuite)', content: '<p>Designed a comprehensive end-to-end solution for a manufacturing client to manage complex cross-departmental workflows, reducing production cycle time by 75% and increasing task visibility by 90%.</p>' },
-            { title: 'Cenzios Learning Management System', content: '<p>Led the design of a full-scale LMS for educational institutes, projected to reduce administrative overhead by 80% and improve enrollment processing time by 75%.</p>' },
+            { title: 'Workflow Supervision System (FlowSuite)', link: 'https://flowsuite.web.cenzios.com/', content: '<p>Designed a comprehensive end-to-end solution for a manufacturing client to manage complex cross-departmental workflows, reducing production cycle time by 75% and increasing task visibility by 90%.</p>' },
+            { title: 'Cenzios Learning Management System', link: 'https://learner.cenzios.com/', content: '<p>Led the design of a full-scale LMS for educational institutes, projected to reduce administrative overhead by 80% and improve enrollment processing time by 75%.</p>' },
             { title: 'Realhack Hackathon', content: '<p>As President of SESA, I led the organization of Realhack, the largest 24-hour physical inter-university hackathon in Sri Lanka, securing sponsorships over millions and coordinating hundreds of participants.</p>'}
         ];
 
@@ -203,7 +198,15 @@
             { title: 'Self-awareness and Emotional Intelligence', issuer: 'SLASSCOM', date: 'Sep 2024' },
             { title: 'Trust Building', issuer: 'SLASSCOM', date: 'Sep 2024' },
             { title: 'Generative AI Overview for Project Managers', issuer: 'Project Management Institute', date: 'Aug 2024' },
-            { title: 'Jira Fundamentals', issuer: 'Atlassian', date: 'Aug 2024' }
+            { title: 'Introduction to Basics of Disciplined Agile™', issuer: 'Project Management Institute', date: 'Aug 2024' },
+            { title: 'Jira Fundamentals', issuer: 'Atlassian', date: 'Aug 2024' },
+            { title: 'PRINCE2 Certification Preparation', issuer: 'Alison', date: 'Aug 2024' },
+            { title: 'Projects in Controlled Environments', issuer: 'Alison', date: 'Aug 2024' },
+            { title: 'Software Development Lifecycle Fundamentals', issuer: 'Great Learning', date: 'Aug 2024' },
+            { title: 'Taming Bias: Using Wicked Problem Solving', issuer: 'Project Management Institute', date: 'Aug 2024' },
+            { title: 'The Basics of Scrum', issuer: 'Project Management Institute', date: 'Aug 2024' },
+            { title: 'Facebook Marketing', issuer: 'Simplebooks', date: 'May 2024' },
+            { title: 'Operating Systems - Intro to Scheduling', issuer: 'Alison', date: 'Sep 2020' }
         ];
 
         const timelineContainer = document.getElementById('timeline-container');
@@ -212,12 +215,12 @@
             const timelineItem = document.createElement('div');
             timelineItem.className = `relative flex items-start md:justify-center md:space-x-8`;
             const contentBlock = `
-                <div class="bg-slate-800 w-full p-4 rounded-lg border border-slate-700 shadow-lg cursor-pointer timeline-item-header">
-                    <p class="text-sm text-cyan-400 font-medium">${item.date}</p>
+                <div class="bg-custom-card w-full p-4 rounded-lg border border-custom shadow-lg cursor-pointer timeline-item-header">
+                    <p class="text-sm text-accent font-medium">${item.date}</p>
                     <h4 class="font-bold text-white">${item.role}</h4>
-                    <p class="text-slate-400">${item.company}</p>
+                    <p class="text-custom-secondary">${item.company}</p>
                     <div class="timeline-item-content">
-                        <ul class="mt-3 text-sm text-slate-400 list-disc list-inside space-y-1">
+                        <ul class="mt-3 text-sm text-custom-secondary list-disc list-inside space-y-1">
                             ${item.details.map(d => `<li>${d}</li>`).join('')}
                         </ul>
                     </div>
@@ -226,7 +229,7 @@
             timelineItem.innerHTML = `
                 <div class="hidden md:block w-1/2 ${isLeft ? 'text-right' : ''}">${isLeft ? contentBlock : ''}</div>
                 <div class="absolute md:relative left-3 md:left-auto top-2 md:top-auto z-10">
-                    <div class="w-1 h-1 bg-cyan-500 ring-4 ring-cyan-500/30 rounded-full"></div>
+                    <div class="w-1 h-1 bg-accent ring-4 ring-accent/30 rounded-full"></div>
                 </div>
                 <div class="ml-10 md:ml-0 md:w-1/2 ${!isLeft ? 'text-left' : ''}">${!isLeft ? contentBlock : ''}</div>
             `;
@@ -240,22 +243,36 @@
         });
 
         const projectsContainer = document.getElementById('projects-container');
-        projectsData.forEach((project, index) => {
-            const card = document.createElement('div');
-            card.className = 'project-card bg-slate-800 p-6 rounded-lg border border-slate-700 transition-all duration-300 cursor-pointer';
-            card.innerHTML = `<h4 class="text-xl font-bold text-white">${project.title}</h4><div class="text-slate-400 mt-2">${project.content}</div>`;
-            card.addEventListener('click', () => openModal(project));
-            projectsContainer.appendChild(card);
+        projectsData.forEach((project) => {
+            const cardContent = `
+                <h4 class="text-xl font-bold text-white">${project.title}</h4>
+                <div class="text-custom-secondary mt-2">${project.content}</div>
+                ${project.link ? `<span class="inline-block mt-4 text-sm font-semibold text-accent hover:text-accent-hover">View Live Site →</span>` : ''}
+            `;
+            if (project.link) {
+                const link = document.createElement('a');
+                link.href = project.link;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.className = 'block project-card bg-custom-card p-6 rounded-lg border border-custom transition-all duration-300';
+                link.innerHTML = cardContent;
+                projectsContainer.appendChild(link);
+            } else {
+                const card = document.createElement('div');
+                card.className = 'bg-custom-card p-6 rounded-lg border border-custom transition-all duration-300';
+                card.innerHTML = cardContent;
+                projectsContainer.appendChild(card);
+            }
         });
 
         const educationContainer = document.getElementById('education-container');
         educationData.forEach(edu => {
             const card = document.createElement('div');
-            card.className = 'bg-slate-800 p-6 rounded-lg border border-slate-700';
+            card.className = 'bg-custom-card p-6 rounded-lg border border-custom';
             card.innerHTML = `
                 <h4 class="font-bold text-white">${edu.degree}</h4>
-                <p class="text-cyan-400">${edu.field}</p>
-                <p class="text-slate-400 mt-1">${edu.university}</p>
+                <p class="text-accent">${edu.field}</p>
+                <p class="text-custom-secondary mt-1">${edu.university}</p>
                 <p class="text-sm text-slate-500">${edu.date}</p>
             `;
             educationContainer.appendChild(card);
@@ -264,30 +281,14 @@
         const certificationsContainer = document.getElementById('certifications-container');
         certificationsData.forEach(cert => {
             const card = document.createElement('div');
-            card.className = 'bg-slate-800 p-4 rounded-lg border border-slate-700';
+            card.className = 'bg-custom-card p-4 rounded-lg border border-custom';
             card.innerHTML = `
                 <h4 class="font-semibold text-white">${cert.title}</h4>
-                <p class="text-slate-400 text-sm">${cert.issuer}</p>
+                <p class="text-custom-secondary text-sm">${cert.issuer}</p>
                 <p class="text-xs text-slate-500 mt-1">${cert.date}</p>
             `;
             certificationsContainer.appendChild(card);
         });
-
-        const modal = document.getElementById('project-modal');
-        const modalTitle = document.getElementById('modal-title');
-        const modalContent = document.getElementById('modal-content');
-        const openModal = (project) => {
-            modalTitle.textContent = project.title;
-            modalContent.innerHTML = project.content;
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            modal.querySelector('div > div').classList.remove('scale-95');
-        };
-        const closeModal = () => {
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            modal.querySelector('div > div').classList.add('scale-95');
-        };
-        document.getElementById('modal-close-btn').addEventListener('click', closeModal);
-        modal.addEventListener('click', e => e.target === modal && closeModal());
 
         const skillsCtx = document.getElementById('skillsChart').getContext('2d');
         new Chart(skillsCtx, {
@@ -297,10 +298,21 @@
                 datasets: [{
                     label: 'Proficiency',
                     data: [95, 90, 92, 85, 88, 80],
-                    backgroundColor: 'rgba(34, 211, 238, 0.4)',
-                    borderColor: 'rgba(34, 211, 238, 1)',
-                    borderWidth: 2,
+                    backgroundColor: function(context) {
+                        const chart = context.chart;
+                        const {ctx, chartArea} = chart;
+                        if (!chartArea) {
+                            return null;
+                        }
+                        const gradient = ctx.createLinearGradient(chartArea.left, 0, chartArea.right, 0);
+                        gradient.addColorStop(0, 'rgba(56, 189, 248, 0.7)');
+                        gradient.addColorStop(0.9, 'rgba(56, 189, 248, 0.1)');
+                        return gradient;
+                    },
+                    borderColor: 'rgba(56, 189, 248, 1)',
+                    borderWidth: 1,
                     borderRadius: 4,
+                    barPercentage: 0.5,
                 }]
             },
             options: {
@@ -308,9 +320,9 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    x: { display: false, min: 50 },
+                    x: { display: false, min: 60 },
                     y: {
-                        ticks: { color: '#94a3b8', font: { size: 14 } },
+                        ticks: { color: getComputedStyle(document.documentElement).getPropertyValue('--text-dark-secondary').trim(), font: { size: 14 } },
                         grid: { display: false }
                     }
                 },
@@ -334,7 +346,6 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.animated-section').forEach(section => observer.observe(section));
         
-        // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const htmlEl = document.documentElement;
@@ -342,20 +353,18 @@
         const savedTheme = localStorage.getItem('theme') || 'dark';
         htmlEl.classList.add(savedTheme);
         themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-        if (savedTheme === 'light') document.body.classList.remove('bg-slate-900', 'text-white');
 
         themeToggle.addEventListener('click', () => {
             if (htmlEl.classList.contains('dark')) {
                 htmlEl.classList.remove('dark');
-                document.body.classList.remove('bg-slate-900', 'text-white');
                 localStorage.setItem('theme', 'light');
                 themeIcon.textContent = '🌙';
             } else {
                 htmlEl.classList.add('dark');
-                document.body.classList.add('bg-slate-900', 'text-white');
                 localStorage.setItem('theme', 'dark');
                 themeIcon.textContent = '☀️';
             }
+            location.reload(); 
         });
     });
     </script>
