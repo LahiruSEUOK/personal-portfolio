@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive CV | Lahiru Sandeepa</title>
+    <!-- Chosen Palette: Calm Neutrals -->
+    <!-- Application Structure Plan: A single-page, vertical-scrolling dashboard. The structure begins with a high-impact hero section, followed by key quantitative metrics for an immediate impression. An interactive career timeline allows users to explore work history without clutter. A skills dashboard with charts visualizes competencies, making them easier to digest than a simple list. Flagship projects are highlighted in a card-based section with modals for detailed views. This non-linear, thematic structure was chosen over a direct CV-to-webpage conversion to create a more engaging user journey, allowing recruiters to quickly grasp key strengths and dive into details as needed, which is more effective for user exploration and information retention. -->
+    <!-- Visualization & Content Choices: 
+        - Professional Summary -> Inform -> Formatted Text -> Static -> Clear first impression -> HTML/Tailwind.
+        - Core Competencies -> Organize/Compare -> Radar Chart -> Hover for details -> Provides a holistic visual of balanced strengths -> Chart.js/Canvas.
+        - Professional Experience -> Show Change -> Interactive Vertical Timeline -> Click to expand/collapse details -> Engages user and manages information density -> HTML/Tailwind/JS.
+        - Key Metrics (Years, Team Size) -> Inform -> Highlight Cards -> Static -> Immediately conveys scale and impact -> HTML/Tailwind.
+        - Technical Skills -> Organize/Compare -> Grouped Horizontal Bar Chart -> Hover for tooltips -> Structures a large number of skills for easy comparison -> Chart.js/Canvas.
+        - Flagship Projects -> Inform/Organize -> Cards with Modals -> Click "Learn More" to open modal -> Features key achievements without cluttering the main view -> HTML/Tailwind/JS.
+        All choices prioritize interactivity and visual clarity to make the CV's content more explorable and memorable. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #f8fafc; 
+            font-family: 'Inter', sans-serif;
+            color: #1e293b;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .timeline-item-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .timeline-item-content.open {
+            max-height: 500px; 
+        }
+        .modal {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex items-center justify-between">
+                <h1 class="text-xl font-bold text-slate-800">Lahiru Sandeepa</h1>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#experience" class="text-slate-600 hover:text-sky-600 transition-colors">Experience</a>
+                    <a href="#skills" class="text-slate-600 hover:text-sky-600 transition-colors">Skills</a>
+                    <a href="#projects" class="text-slate-600 hover:text-sky-600 transition-colors">Projects</a>
+                    <a href="#education" class="text-slate-600 hover:text-sky-600 transition-colors">Education</a>
+                </div>
+                <a href="mailto:lahirusandeepa22@gmail.com" class="hidden md:block bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700 transition-colors">Contact Me</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-24">
+        <div class="container mx-auto px-6">
+            
+            <section id="hero" class="text-center py-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Project Manager | Solution Designer | Agile Leader</h2>
+                <p class="mt-6 max-w-3xl mx-auto text-lg text-slate-600">Strategic Project and Product Manager with 7+ years of progressive experience delivering complex, large-scale enterprise solutions. Expert in leading high-performing teams, designing client-centric solutions, and bridging stakeholder needs with technical execution.</p>
+            </section>
+
+            <section id="metrics" class="py-12">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-slate-100">
+                        <p class="text-4xl font-bold text-sky-600">7+</p>
+                        <p class="text-slate-500 mt-2">Years of Professional Experience</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-slate-100">
+                        <p class="text-4xl font-bold text-sky-600">15+</p>
+                        <p class="text-slate-500 mt-2">Team Members Led</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-slate-100">
+                        <p class="text-4xl font-bold text-sky-600">90%</p>
+                        <p class="text-slate-500 mt-2">On-Time Project Delivery</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="experience" class="py-16">
+                <h3 class="text-3xl font-bold text-center mb-12">Career Timeline</h3>
+                <div class="relative max-w-3xl mx-auto">
+                    <div class="absolute left-1/2 -translate-x-1/2 h-full w-0.5 bg-slate-200"></div>
+                    <div id="timeline-container" class="space-y-12">
+                    </div>
+                </div>
+            </section>
+            
+            <section id="skills" class="py-16 bg-white rounded-2xl shadow-md border border-slate-100 my-16">
+                <h3 class="text-3xl font-bold text-center mb-4">Skills Dashboard</h3>
+                <p class="text-center text-slate-600 max-w-2xl mx-auto mb-12">A visual overview of my core competencies and technical capabilities, showcasing a balanced skill set for project execution and leadership.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-6">
+                    <div>
+                        <h4 class="text-xl font-semibold text-center mb-4">Core Competencies</h4>
+                        <div class="chart-container">
+                            <canvas id="competenciesChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold text-center mb-4">Technical & Business Skills</h4>
+                        <div class="chart-container h-96 md:h-[500px]">
+                            <canvas id="technicalSkillsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="py-16">
+                <h3 class="text-3xl font-bold text-center mb-4">Flagship Projects</h3>
+                <p class="text-center text-slate-600 max-w-2xl mx-auto mb-12">Highlighting key projects where I led solution design and project management to deliver significant business impact and operational improvements.</p>
+                <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                </div>
+            </section>
+
+            <section id="education" class="py-16">
+                <h3 class="text-3xl font-bold text-center mb-12">Education & Certifications</h3>
+                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div>
+                        <h4 class="text-xl font-semibold mb-4 border-b pb-2">Education</h4>
+                        <ul class="space-y-4">
+                             <li>
+                                <p class="font-semibold">MBA - Project Management (Reading)</p>
+                                <p class="text-slate-500">Cardiff Metropolitan University, UK (2024 - Present)</p>
+                            </li>
+                            <li>
+                                <p class="font-semibold">Diploma in Human Resource Management</p>
+                                <p class="text-slate-500">Chartered Institute of Professional Management (2023 - 2024)</p>
+                            </li>
+                            <li>
+                                <p class="font-semibold">B.Sc. (Hons) in Software Engineering</p>
+                                <p class="text-slate-500">University of Kelaniya, Sri Lanka (2019 - 2023)</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold mb-4 border-b pb-2">Certifications</h4>
+                        <ul class="space-y-2 text-slate-600">
+                           <li>✓ Agile Scrum Master</li>
+                           <li>✓ Leadership (SLASSCOM)</li>
+                           <li>✓ Generative AI Overview for Project Managers (PMI)</li>
+                           <li>✓ Comprehensive Guide to Software Architecture</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-slate-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <h4 class="text-2xl font-bold mb-2">Get in Touch</h4>
+            <p class="text-slate-300 mb-4">Feel free to reach out for collaborations or just a friendly chat.</p>
+            <div class="flex justify-center items-center space-x-6">
+                <a href="mailto:lahirusandeepa22@gmail.com" class="hover:text-sky-400 transition-colors">lahirusandeepa22@gmail.com</a>
+                <span class="text-slate-500">|</span>
+                <a href="tel:+94711186028" class="hover:text-sky-400 transition-colors">(+94) 71 118 6028</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="project-modal" class="modal fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
+            <div class="p-6">
+                <div class="flex justify-between items-start">
+                    <h3 id="modal-title" class="text-2xl font-bold mb-4">Project Title</h3>
+                    <button id="modal-close-btn" class="text-slate-500 hover:text-slate-800">&times;</button>
+                </div>
+                <div id="modal-content" class="text-slate-600 space-y-4"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const experienceData = [
+            {
+                role: 'Project Manager',
+                company: 'Cenzios Pvt Ltd',
+                date: 'Mar 2025 - Present',
+                side: 'right',
+                details: [
+                    'Lead end-to-end delivery of enterprise software solutions, managing 3+ concurrent projects with a combined annual budget of 10M+.',
+                    'Lead cross-functional teams of 15+ members to deliver high-impact products.',
+                    'Design innovative end-to-end technical solutions in collaboration with BA and UI/UX teams.',
+                    'Define product vision, system solution, high-level architecture, and technical roadmaps.',
+                    'Implement Agile/Scrum frameworks to optimize team velocity and ensure a 90% on-time project delivery rate.'
+                ]
+            },
+            {
+                role: 'Associate Project Manager',
+                company: 'Aventure IT',
+                date: 'Oct 2024 - Mar 2025',
+                side: 'left',
+                details: [
+                    'Coordinated cross-functional teams of 8-12 members to deliver 3 complex IT infrastructure and SaaS software projects.',
+                    'Managed project planning and resource allocation using Jira.',
+                    'Facilitated agile ceremonies, including sprint planning, daily standups, and retrospectives.',
+                    'Initiated knowledge-sharing sessions and productivity improvement workshops.',
+                    'Reduced project delivery timelines through process optimization and automation initiatives.'
+                ]
+            },
+            {
+                role: 'Founder',
+                company: 'Safer Technologies',
+                date: 'Jan 2024 - Present',
+                side: 'right',
+                details: [
+                    'Founded a boutique IT consultancy, delivering custom IT solutions to SMEs and startups.',
+                    'Manage the full project lifecycle from client discovery to deployment.',
+                    'Successfully delivered multiple projects, including web applications and automation tools.',
+                    'Maintain strong client relationships through a consultative approach.'
+                ]
+            },
+            {
+                role: 'Business Development Manager',
+                company: 'Our Nation Pvt Ltd',
+                date: 'Oct 2022 - Oct 2024',
+                side: 'left',
+                details: [
+                    'Led business development for a hospitality and retail business, managing 4 restaurant locations and 25+ staff.',
+                    'Managed comprehensive business operations, including budgeting, financial planning, and procurement.',
+                    'Drove IT modernization initiatives to streamline operations, inventory, and point-of-sale systems.',
+                    'Identified market opportunities and translated customer pain points into scalable operational improvements.'
+                ]
+            }
+        ];
+        
+        const projectsData = [
+            {
+                title: 'Workflow Supervision Management System (FlowSuite)',
+                role: 'Project Manager & Solution Designer',
+                content: `
+                    <p>Designed and managed a comprehensive end-to-end solution addressing complex cross-departmental workflow challenges for a major manufacturing client.</p>
+                    <p><strong>Key Responsibilities:</strong></p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Led the full solution design process from client needs analysis to system architecture, creating workflows for task tracking, resource allocation, and real-time performance monitoring.</li>
+                        <li>Managed the complete project lifecycle, coordinating an 8-member development team and facilitating collaboration with 11 stakeholders across 12 agile sprints.</li>
+                        <li>Conducted extensive requirements gathering and translated business needs into a functional product roadmap.</li>
+                    </ul>
+                    <p class="font-semibold mt-4">Business Impact:</p>
+                    <div class="flex flex-wrap gap-4 mt-2">
+                        <span class="bg-sky-100 text-sky-800 text-sm font-medium px-3 py-1 rounded-full">75% Reduction in Production Cycle Time</span>
+                        <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">90% Increase in Task Visibility</span>
+                    </div>
+                `
+            },
+            {
+                title: 'Cenzios Learning Management System',
+                role: 'Project Manager & Solution Designer',
+                content: `
+                    <p>Designed and managed a comprehensive LMS platform for growing educational institutes, automating and centralizing key administrative and academic operations.</p>
+                    <p><strong>Key Responsibilities:</strong></p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Led solution design from concept to implementation, translating complex requirements for managing learners, courses, payments, scheduling, and staff into a centralized system.</li>
+                        <li>Managed a cross-functional team of 10 members through agile delivery, coordinating requirements gathering and iterative development cycles.</li>
+                        <li>Successfully managed ongoing development phases while maintaining alignment with institutional growth objectives.</li>
+                    </ul>
+                    <p class="font-semibold mt-4">Projected Impact:</p>
+                     <div class="flex flex-wrap gap-4 mt-2">
+                        <span class="bg-sky-100 text-sky-800 text-sm font-medium px-3 py-1 rounded-full">80% Reduction in Admin Overhead</span>
+                        <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">75% Faster Enrollment Processing</span>
+                    </div>
+                `
+            }
+        ];
+
+        const timelineContainer = document.getElementById('timeline-container');
+        experienceData.forEach((item, index) => {
+            const isLeft = item.side === 'left';
+            const timelineItem = document.createElement('div');
+            timelineItem.className = `relative flex items-center ${isLeft ? 'justify-start' : 'justify-end'}`;
+
+            timelineItem.innerHTML = `
+                <div class="absolute w-4 h-4 bg-sky-600 rounded-full left-1/2 -translate-x-1/2"></div>
+                <div class="w-[calc(50%-2rem)]">
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-slate-100 cursor-pointer timeline-item-header">
+                        <p class="text-sm text-slate-500">${item.date}</p>
+                        <h4 class="font-bold text-slate-800">${item.role}</h4>
+                        <p class="text-slate-600">${item.company}</p>
+                        <div class="timeline-item-content">
+                            <ul class="mt-3 text-sm text-slate-500 list-disc list-inside space-y-1">
+                                ${item.details.map(d => `<li>${d}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+            timelineContainer.appendChild(timelineItem);
+        });
+        
+        document.querySelectorAll('.timeline-item-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.querySelector('.timeline-item-content');
+                content.classList.toggle('open');
+            });
+        });
+
+        const projectsContainer = document.getElementById('projects-container');
+        projectsData.forEach((project, index) => {
+            const projectCard = document.createElement('div');
+            projectCard.className = 'bg-white p-6 rounded-lg shadow-md border border-slate-100 flex flex-col';
+            projectCard.innerHTML = `
+                <h4 class="text-xl font-bold text-slate-800">${project.title}</h4>
+                <p class="text-sky-600 font-medium my-2">${project.role}</p>
+                <p class="text-slate-600 flex-grow">${project.content.split('<p>')[1].replace('</p>','').substring(0, 100)}...</p>
+                <button data-index="${index}" class="project-modal-btn mt-4 self-start bg-slate-100 text-slate-700 px-4 py-2 rounded-lg hover:bg-slate-200 transition-colors">Learn More</button>
+            `;
+            projectsContainer.appendChild(projectCard);
+        });
+
+        const modal = document.getElementById('project-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+
+        document.querySelectorAll('.project-modal-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const projectIndex = btn.dataset.index;
+                const project = projectsData[projectIndex];
+                modalTitle.textContent = project.title;
+                modalContent.innerHTML = project.content;
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modal.querySelector('div > div').classList.remove('scale-95');
+            });
+        });
+
+        const closeModal = () => {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('div > div').classList.add('scale-95');
+        };
+
+        modalCloseBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        new Chart(document.getElementById('competenciesChart'), {
+            type: 'radar',
+            data: {
+                labels: ['Agile/Scrum', 'Solution Design', 'Stakeholder Mgmt', 'Client Relations', 'Team Leadership', 'Budget Mgmt'],
+                datasets: [{
+                    label: 'Core Competencies',
+                    data: [9, 9, 8, 8, 9, 7],
+                    backgroundColor: 'rgba(56, 189, 248, 0.2)',
+                    borderColor: 'rgba(14, 165, 233, 1)',
+                    pointBackgroundColor: 'rgba(14, 165, 233, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(14, 165, 233, 1)'
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(0,0,0,0.1)' },
+                        grid: { color: 'rgba(0,0,0,0.1)' },
+                        pointLabels: { font: { size: 12 } },
+                        ticks: {
+                            display: false,
+                            stepSize: 2
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('technicalSkillsChart'), {
+            type: 'bar',
+            data: {
+                labels: [ 'Agile, Scrum, Kanban', 'Jira, ClickUp, MS Project', 'Product Roadmapping', 'API Testing, DB Mgmt', 'Financial Modeling' ],
+                datasets: [{
+                    label: 'Skill Area',
+                    data: [90, 85, 88, 75, 70],
+                    backgroundColor: [
+                        'rgba(59, 130, 246, 0.7)',
+                        'rgba(16, 185, 129, 0.7)',
+                        'rgba(249, 115, 22, 0.7)',
+                        'rgba(239, 68, 68, 0.7)',
+                        'rgba(139, 92, 246, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(59, 130, 246, 1)',
+                        'rgba(16, 185, 129, 1)',
+                        'rgba(249, 115, 22, 1)',
+                        'rgba(239, 68, 68, 1)',
+                        'rgba(139, 92, 246, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        display: false
+                    },
+                    y: {
+                        ticks: {
+                            font: { size: 12 }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                           title: function(context) {
+                             const label = context[0].label;
+                             if(label.includes('Agile')) return 'Project Management';
+                             if(label.includes('Jira')) return 'Tools & Platforms';
+                             if(label.includes('Product')) return 'Product Management';
+                             if(label.includes('API')) return 'Technical Knowledge';
+                             if(label.includes('Financial')) return 'Business';
+                             return '';
+                           }
+                        }
+                    }
+                }
+            }
+        });
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+    });
+    </script>
+</body>
+</html>
