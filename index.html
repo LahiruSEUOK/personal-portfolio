@@ -173,7 +173,7 @@
 
             <div class="space-y-24">
                 <section id="experience" class="animated-section">
-                    <h3 class="text-3xl font-bold text-center mb-16 text-light-primary">💼 Career Roadmap</h3>
+                    <h3 class="text-3xl font-bold text-center mb-16 text-light-primary">Career Roadmap</h3>
                     <div class="relative max-w-3xl mx-auto">
                         <div class="absolute left-3 md:left-1/2 md:-translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-accent-purple to-accent-cyan opacity-30"></div>
                         <div id="timeline-container" class="space-y-8"></div>
@@ -181,7 +181,7 @@
                 </section>
                 
                 <section id="skills" class="animated-section">
-                    <h3 class="text-3xl font-bold text-center mb-12 text-light-primary">🧠 Core Competencies</h3>
+                    <h3 class="text-3xl font-bold text-center mb-12 text-light-primary">Core Competencies</h3>
                     <div class="glass-card max-w-4xl mx-auto p-8">
                         <div class="chart-container" style="height: 450px;">
                             <canvas id="skillsChart"></canvas>
@@ -338,7 +338,7 @@
         new Chart(skillsCtx, {
             type: 'bar',
             data: {
-                labels: ['Agile Project Management', 'Solution Architecture', 'Team & Stakeholder Mgmt', 'Business Development', 'Software Design', 'Financial Planning'],
+                labels: ['Agile Project Management', 'Solution Design', 'Team & Stakeholder Management', 'Business Development', 'Software Design', 'Financial Planning'],
                 datasets: [{
                     data: [95, 90, 92, 85, 88, 80],
                     backgroundColor: function(context) {
@@ -404,7 +404,7 @@
         });
 
 
-        const roles = ["PROJECT MANAGER", "PRODUCT MANAGER", "SOLUTION DESIGNER", "AGILE LEADER"];
+        const roles = ["PROJECT MANAGER", "PRODUCT MANAGER", "PRODUCT OWNER", "SOLUTION DESIGNER", "AGILE LEADER"];
         let roleIndex = 0;
         let charIndex = 0;
         const roleTextElement = document.getElementById('role-text');
