@@ -4,17 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lahiru Sandeepa | Strategic Product Builder</title>
-    <!-- Chosen Palette: FinTech Purple --><!-- Application Structure Plan: Inspired by the FinTech dashboard, this redesign merges the hero and skills sections into a single, high-impact "command center" view. The aesthetic is pure "glassmorphism" over a textured, dark background with aurora glows. The entire page is structured as a series of floating glass panels. Content is organized into a more dynamic "bento box" grid for projects and certifications to create visual interest. This moves the portfolio from a static page to an immersive, app-like experience. --><!-- Visualization & Content Choices: 
-        - Hero -> Inform/Excite -> A dedicated hero section with a typewriter animation for roles to immediately capture recruiter attention.
-        - Experience -> Show Change -> A completely redesigned horizontal, graphical roadmap inspired by modern tech timelines for a high-impact visual journey.
-        - Skills -> Organize/Compare -> A redesigned bar chart with background tracks and refined gradients, matching the provided inspiration image.
-        - Projects & Certifications -> Inform/Organize -> Asymmetrical "Bento Box" Grid -> Glass cards of varying sizes create a dynamic, modern layout. Project links are now styled as prominent buttons.
-        - Education -> Inform -> A clean grid of glassmorphic cards maintains theme consistency.
-        This redesign prioritizes a sophisticated, data-driven, and visually rich aesthetic with enhanced usability. --><!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. --><script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark-primary: #0D1117;
@@ -25,6 +18,7 @@
             --accent-cyan: #39C0C7;
             --border-color: rgba(139, 148, 158, 0.15);
             --glass-bg: rgba(22, 27, 34, 0.5);
+            --glass-hover: rgba(22, 27, 34, 0.7);
             --track-bg: rgba(40, 45, 53, 0.5);
         }
         
@@ -32,7 +26,6 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-dark-primary);
             color: var(--text-light-primary);
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXVuZmaPe2iOjbGtrq2EhIaIiIqioiIeqRGqrq2UjZzn5+fLy8vNzc3JycmdnZ3o6OjR0dHW1tbV1dXa2trX19fg4ODj4+ParceAAAAAJXRSTMA+A8AAPj/APX+2An8/fnq5tjAw8PAwMDBw8DBw8DBw5eXl5eXl5cuAHbIAAABsElEQVR42uzV246DMAwF0AhdwgUe+97/f92IBBOg68eOa6kZg92Ie0E4l2m3vJdBjkl3N3Zg3L1f2/xP8p1YfCgSAHev4W9QLgJnsCAW/w/6s5K/R/5G/SP/Ef8Tf8R/xF8g/yJ/if8I/8R/hP/Cf8I/wj/B38DfyL/BX9D/in8F/w3/Gv8W/w3/Hv8W/wX/F/8X/xT/Fv8U/xL/FP8R/xL/Ef8Q/xD/CP8H/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/Bv8G/wb/-1-2s=');
             position: relative;
         }
 
@@ -43,16 +36,28 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: radial-gradient(circle at top right, rgba(138, 92, 245, 0.2), transparent 40%), radial-gradient(circle at bottom left, rgba(57, 192, 199, 0.2), transparent 50%);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(138, 92, 245, 0.15), transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(57, 192, 199, 0.15), transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(168, 133, 253, 0.1), transparent 60%);
             z-index: -1;
             pointer-events: none;
-            animation: aurora 20s infinite linear;
+            animation: aurora 25s infinite ease-in-out;
         }
 
         @keyframes aurora {
-            0% { transform: rotate(0deg) scale(1.5); }
-            50% { transform: rotate(180deg) scale(2); }
-            100% { transform: rotate(360deg) scale(1.5); }
+            0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+            50% { opacity: 0.8; transform: scale(1.1) rotate(5deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(138, 92, 245, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(138, 92, 245, 0.6), 0 0 60px rgba(57, 192, 199, 0.4); }
         }
 
         .animated-section {
@@ -66,90 +71,181 @@
         }
         
         .glass-card {
-            background-color: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            border-radius: 1rem;
+            background: linear-gradient(135deg, rgba(22, 27, 34, 0.6) 0%, rgba(22, 27, 34, 0.4) 100%);
+            backdrop-filter: blur(16px);
+            border-radius: 1.25rem;
             border: 1px solid var(--border-color);
-            transition: all 0.3s ease-in-out;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .glass-card:hover::before {
+            left: 100%;
+        }
+        
         .glass-card:hover {
-            border-color: rgba(138, 92, 245, 0.5);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-color: rgba(138, 92, 245, 0.6);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 20px rgba(138, 92, 245, 0.2);
+            background: linear-gradient(135deg, rgba(22, 27, 34, 0.8) 0%, rgba(22, 27, 34, 0.6) 100%);
         }
 
         .primary-button {
-            background: linear-gradient(to right, var(--accent-purple), var(--accent-purple-light));
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-purple-light));
             color: white;
-            padding: 14px 28px;
+            padding: 16px 32px;
             border-radius: 9999px;
             font-weight: 600;
-            box-shadow: 0 4px 15px rgba(138, 92, 245, 0.3);
+            box-shadow: 0 4px 20px rgba(138, 92, 245, 0.4);
             transition: all 0.3s ease-in-out;
             border: none;
             cursor: pointer;
             position: relative;
             overflow: hidden;
         }
-        .primary-button:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(138, 92, 245, 0.5);
+        
+        .primary-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
+        
+        .primary-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .primary-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(138, 92, 245, 0.6);
+        }
+        
         .link-button {
-            background-color: var(--accent-purple);
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
             color: white;
-            padding: 8px 16px;
+            padding: 10px 20px;
             border-radius: 9999px;
             font-size: 0.875rem;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
         }
         .link-button:hover {
-            background-color: var(--accent-purple-light);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(138, 92, 245, 0.5);
         }
-        .chart-container {
-            position: relative; 
-            height: 450px;
-            width: 100%;
-        }
+        
         .header-bg {
-            background-color: rgba(13, 17, 23, 0.7);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 60px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
-        .bento-grid {
-            display: grid;
-            gap: 1.5rem;
-            grid-template-columns: repeat(6, 1fr);
+        
+        .hero-float {
+            animation: float 6s ease-in-out infinite;
         }
+        
+        .hero-glow {
+            animation: glow 3s ease-in-out infinite;
+        }
+        
         .typewriter-cursor {
             display: inline-block;
             width: 3px;
             height: 1.2em;
             background-color: var(--accent-purple);
-            animation: blink 0.5s infinite;
+            animation: blink 0.7s infinite;
             margin-left: 4px;
         }
+        
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .shimmer {
+            animation: shimmer 2.5s infinite;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent-purple), var(--accent-cyan));
+            border-radius: 2px;
+        }
+        
+        .skill-card {
+            background: linear-gradient(135deg, rgba(30, 35, 44, 0.6) 0%, rgba(22, 27, 34, 0.8) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 1rem;
+            border: 1px solid rgba(138, 92, 245, 0.3);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-card:hover {
+            border-color: rgba(138, 92, 245, 0.6);
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(138, 92, 245, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <header class="header-bg fixed top-0 left-0 right-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <nav class="flex items-center justify-between">
-                <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-accent-purple to-accent-cyan">Lahiru Sandeepa</h1>
+    <header class="fixed top-0 left-0 right-0 z-50 px-6 py-4">
+        <div class="container mx-auto">
+            <nav class="header-bg flex items-center justify-between px-8 py-4">
+                <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400">Lahiru Sandeepa</h1>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#experience" class="text-light-secondary hover:text-white transition-colors">Experience</a>
-                    <a href="#skills" class="text-light-secondary hover:text-white transition-colors">Skills</a>
-                    <a href="#projects" class="text-light-secondary hover:text-white transition-colors">Projects</a>
-                    <a href="#education" class="text-light-secondary hover:text-white transition-colors">Education</a>
-                    <a href="#certifications" class="text-light-secondary hover:text-white transition-colors">Certifications</a>
+                    <a href="#experience" class="text-gray-300 hover:text-white transition-colors font-medium">Experience</a>
+                    <a href="#skills" class="text-gray-300 hover:text-white transition-colors font-medium">Skills</a>
+                    <a href="#projects" class="text-gray-300 hover:text-white transition-colors font-medium">Projects</a>
+                    <a href="#education" class="text-gray-300 hover:text-white transition-colors font-medium">Education</a>
+                    <a href="#contact" class="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-semibold hover:shadow-lg transition-all">Contact</a>
                 </div>
             </nav>
         </div>
@@ -158,59 +254,113 @@
     <main class="pt-24">
         <div class="container mx-auto px-6">
             
-            <section id="hero" class="py-20 animated-section text-center">
-                 <div class="glass-card max-w-4xl mx-auto p-8 md:p-12">
-                    <h1 class="text-4xl lg:text-6xl font-extrabold tracking-tight">Lahiru Sandeepa</h1>
-                    <div class="h-12 mt-4">
-                        <span id="role-text" class="text-xl lg:text-2xl text-accent-purple font-semibold"></span><span class="typewriter-cursor"></span>
-                    </div>
-                    <p class="mt-4 text-lg max-w-2xl mx-auto text-light-secondary">A dynamic leader who transforms complex business challenges into elegant, high-impact software solutions. I build, lead, and deliver with precision.</p>
-                    <div class="mt-8">
-                        <a href="mailto:lahirusandeepa22@gmail.com" class="primary-button magnetic-button">Get In Touch</a>
+            <section id="hero" class="py-20 animated-section">
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                        <div class="lg:col-span-2 glass-card p-10 hero-glow">
+                            <div class="mb-6">
+                                <span class="inline-block px-4 py-2 rounded-full text-sm font-semibold bg-gradient-to-r from-purple-500/20 to-cyan-500/20 border border-purple-500/30 text-purple-300">
+                                    Available for New Opportunities
+                                </span>
+                            </div>
+                            <h1 class="text-5xl lg:text-7xl font-black tracking-tight mb-4">
+                                Lahiru<br/>
+                                <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-purple-300 to-cyan-400">Sandeepa</span>
+                            </h1>
+                            <div class="h-14 mb-6">
+                                <span id="role-text" class="text-2xl lg:text-3xl font-bold text-purple-400"></span><span class="typewriter-cursor"></span>
+                            </div>
+                            <p class="text-lg text-gray-300 leading-relaxed mb-8 max-w-2xl">
+                                A strategic product builder who transforms complex business challenges into elegant, scalable solutions. I lead high-performing teams, architect innovative products, and deliver measurable business impact.
+                            </p>
+                            <div class="flex flex-wrap gap-4">
+                                <a href="#contact" class="primary-button magnetic-button relative z-10">Let's Connect</a>
+                                <a href="#projects" class="px-8 py-4 rounded-full border-2 border-purple-500/50 text-white font-semibold hover:bg-purple-500/10 transition-all">
+                                    View My Work
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="glass-card p-6 text-center hero-float">
+                                <div class="stat-number">7+</div>
+                                <p class="text-gray-400 font-medium">Years Experience</p>
+                            </div>
+                            <div class="glass-card p-6 text-center hero-float" style="animation-delay: 0.5s;">
+                                <div class="stat-number">15+</div>
+                                <p class="text-gray-400 font-medium">Team Members Managed</p>
+                            </div>
+                            <div class="glass-card p-6 text-center hero-float" style="animation-delay: 1s;">
+                                <div class="stat-number">20+</div>
+                                <p class="text-gray-400 font-medium">Certifications</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <div class="space-y-24">
+            <div class="space-y-32">
                 <section id="experience" class="animated-section">
-                    <h3 class="text-3xl font-bold text-center mb-16 text-light-primary">Career Roadmap</h3>
-                    <div class="relative max-w-3xl mx-auto">
-                        <div class="absolute left-3 md:left-1/2 md:-translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-accent-purple to-accent-cyan opacity-30"></div>
-                        <div id="timeline-container" class="space-y-8"></div>
+                    <div class="text-center mb-16">
+                        <h3 class="text-4xl font-black mb-4">Career Journey</h3>
+                        <p class="text-gray-400 text-lg">Building products and leading teams across industries</p>
                     </div>
+                    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6" id="timeline-container"></div>
                 </section>
                 
                 <section id="skills" class="animated-section">
-                    <h3 class="text-3xl font-bold text-center mb-12 text-light-primary">Core Competencies</h3>
-                    <div class="glass-card max-w-4xl mx-auto p-8">
-                        <div class="chart-container" style="height: 450px;">
-                            <canvas id="skillsChart"></canvas>
-                        </div>
+                    <div class="text-center mb-16">
+                        <h3 class="text-4xl font-black mb-4">Core Competencies</h3>
+                        <p class="text-gray-400 text-lg">Expertise that drives results</p>
                     </div>
+                    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6" id="skills-container"></div>
                 </section>
 
                 <section id="projects" class="animated-section">
-                    <h3 class="text-3xl font-bold text-center mb-12 text-light-primary">🚀 Flagship Projects</h3>
-                    <div id="projects-container" class="bento-grid"></div>
+                    <div class="text-center mb-16">
+                        <h3 class="text-4xl font-black mb-4">Flagship Projects</h3>
+                        <p class="text-gray-400 text-lg">Transforming ideas into impactful solutions</p>
+                    </div>
+                    <div id="projects-container" class="grid grid-cols-1 gap-8 max-w-6xl mx-auto"></div>
                 </section>
 
                 <section id="education" class="animated-section">
-                    <h3 class="text-3xl font-bold text-center mb-12 text-light-primary">🎓 Education</h3>
-                    <div id="education-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+                    <div class="text-center mb-16">
+                        <h3 class="text-4xl font-black mb-4">Education</h3>
+                        <p class="text-gray-400 text-lg">Academic foundation for excellence</p>
+                    </div>
+                    <div id="education-container" class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"></div>
                 </section>
                 
                 <section id="certifications" class="animated-section">
-                    <h3 class="text-3xl font-bold text-center mb-12 text-light-primary">🏆 Licenses & Certifications</h3>
-                    <div id="certifications-container" class="bento-grid"></div>
+                    <div class="text-center mb-16">
+                        <h3 class="text-4xl font-black mb-4">Certifications</h3>
+                        <p class="text-gray-400 text-lg">Continuous learning and professional development</p>
+                    </div>
+                    <div id="certifications-container" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-6xl mx-auto"></div>
                 </section>
 
-                <section id="cta" class="animated-section text-center py-20">
-                    <div class="glass-card max-w-3xl mx-auto p-8 md:p-12">
-                        <h3 class="text-3xl font-bold">🤝 Let's Connect</h3>
-                        <p class="mt-4 text-light-secondary">I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious team. Let's build the future together.</p>
-                        <div class="mt-8">
-                            <a href="mailto:lahirusandeepa22@gmail.com" class="primary-button magnetic-button">Say Hello</a>
+                <section id="contact" class="animated-section py-20">
+                    <div class="glass-card max-w-4xl mx-auto p-12 text-center hero-glow">
+                        <h3 class="text-4xl font-black mb-4">Let's Build Something Amazing</h3>
+                        <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+                            I'm always excited to discuss new projects, innovative ideas, or opportunities to create impact through technology. Whether you need a strategic product leader or a technical problem solver, let's connect.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
+                            <a href="mailto:lahirusandeepa22@gmail.com" class="flex items-center gap-3 text-purple-400 hover:text-purple-300 transition-colors">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                                <span class="font-semibold">lahirusandeepa22@gmail.com</span>
+                            </a>
+                            <a href="tel:+94711186028" class="flex items-center gap-3 text-cyan-400 hover:text-cyan-300 transition-colors">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                <span class="font-semibold">+94 71 118 6028</span>
+                            </a>
                         </div>
+                        <a href="mailto:lahirusandeepa22@gmail.com" class="primary-button magnetic-button">Get In Touch</a>
                     </div>
                 </section>
             </div>
@@ -218,192 +368,189 @@
         </div>
     </main>
 
-    <footer class="mt-16 border-t" style="border-color: var(--border-color);">
-        <div class="container mx-auto px-6 py-8 text-center text-light-secondary">
-            <p>&copy; 2025 Lahiru Sandeepa. All rights reserved.</p>
-            <p class="mt-2 text-sm">Designed with inspiration from modern FinTech UI.</p>
+    <footer class="mt-24 border-t" style="border-color: var(--border-color);">
+        <div class="container mx-auto px-6 py-12">
+            <div class="text-center">
+                <h2 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400 mb-4">Lahiru Sandeepa</h2>
+                <p class="text-gray-400 mb-6">Strategic Product Builder | Project Manager | Solution Designer</p>
+                <div class="flex justify-center gap-6 mb-8">
+                    <a href="mailto:lahirusandeepa22@gmail.com" class="text-gray-400 hover:text-purple-400 transition-colors">Email</a>
+                    <a href="tel:+94711186028" class="text-gray-400 hover:text-cyan-400 transition-colors">Phone</a>
+                </div>
+                <p class="text-gray-500 text-sm">&copy; 2025 Lahiru Sandeepa. Crafted with precision and passion.</p>
+            </div>
         </div>
     </footer>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const experienceData = [
-            { role: 'Project Manager', company: 'Cenzios', date: 'Mar 2025 - Present', details: ['Lead cross-functional teams to deliver end-to-end software solutions.', 'Manage complex IT and business projects from inception to completion.', 'Translate business requirements into actionable technical solutions.', 'Apply Agile, Waterfall, and Hybrid methodologies to optimize project execution.'] },
-            { role: 'Founder', company: 'Safer Technologies', date: 'Jan 2024 - Present', details: ['Founded a side venture to deliver custom software solutions and IT services.', 'Help businesses leverage innovative and secure technology to solve real problems.'] },
-            { role: 'Associate Project Manager', company: 'Aventure IT', date: 'Oct 2024 - Mar 2025', details: ['Led project planning and execution for various client projects.', 'Managed resource allocation and ensured optimal team performance using JIRA.', 'Conducted risk management and financial planning.'] },
-            { role: 'Business Development Manager', company: 'Our Nation PVT Ltd', date: 'Oct 2022 - Oct 2024', details: ['Managed sales, marketing, and business enhancement for a multi-location business with 25+ staff.', 'Responsible for risk management, financial planning, and resource allocation.'] },
-            { role: 'President, SESA', company: 'University of Kelaniya', date: 'Jul 2022 - Jul 2023', details: ['Led one of the most active student bodies in the Faculty of Science.', 'Organized the largest 24-hour inter-university hackathon (Realhack).', 'Managed event planning, fundraising, and sponsor relations for a multi-million budget.'] },
-            { role: 'Business Analyst Intern', company: 'ELZIAN AGRO', date: 'Sep 2021 - Feb 2022', details: ['Bridged the gap between business needs and technological solutions in the agribusiness sector.', 'Managed stakeholder communication, requirements elicitation, and documentation.'] },
-            { role: 'Sales Manager & Executive', company: 'AIA Sri Lanka', date: 'Apr 2018 - Sep 2021', details: ['Gained promotion through high performance and commitment.', 'Developed leadership, recruiting, teamwork, and mentoring skills while studying.'] }
+            { role: 'Project Manager', company: 'Cenzios', date: 'Mar 2025 - Present', details: 'Leading cross-functional teams to deliver enterprise software solutions. Managing complex IT projects with Agile and Hybrid methodologies.' },
+            { role: 'Founder', company: 'Safer Technologies', date: 'Jan 2024 - Present', details: 'Building custom software solutions and IT services to help businesses leverage secure, innovative technology.' },
+            { role: 'Associate Project Manager', company: 'Aventure IT', date: 'Oct 2024 - Mar 2025', details: 'Spearheaded project planning, resource allocation, and risk management for diverse client portfolios using JIRA.' },
+            { role: 'Business Development Manager', company: 'Our Nation PVT Ltd', date: 'Oct 2022 - Oct 2024', details: 'Managed operations for 25+ staff across multiple locations, driving sales, marketing, and strategic business growth.' },
+            { role: 'President, SESA', company: 'University of Kelaniya', date: 'Jul 2022 - Jul 2023', details: 'Led the largest 24-hour inter-university hackathon (Realhack) and managed multi-million rupee budgets.' },
+            { role: 'Business Analyst Intern', company: 'ELZIAN AGRO', date: 'Sep 2021 - Feb 2022', details: 'Bridged business and technology in agribusiness, managing stakeholder communication and requirements.' },
+            { role: 'Sales Manager & Executive', company: 'AIA Sri Lanka', date: 'Apr 2018 - Sep 2021', details: 'Promoted through excellence in sales leadership, team building, and mentoring while completing university.' }
         ];
 
         const projectsData = [
-            { title: 'Workflow Supervision System (FlowSuite)', link: 'https://flowsuite.web.cenzios.com/', content: 'A comprehensive solution for manufacturing clients to manage cross-departmental workflows.', size: 'col-span-6 md:col-span-4 row-span-2' },
-            { title: 'Cenzios Learning Management System', link: 'https://learner.cenzios.com/', content: 'A full-scale LMS for educational institutes to reduce administrative overhead.', size: 'col-span-6 md:col-span-2 row-span-2' },
-            { title: 'Realhack Hackathon', content: 'Organized the largest 24-hour physical inter-university hackathon in Sri Lanka.', size: 'col-span-6' }
+            { 
+                title: 'FlowSuite - Workflow Supervision System', 
+                link: 'https://flowsuite.web.cenzios.com/', 
+                content: 'A comprehensive enterprise solution designed for manufacturing clients to streamline cross-departmental workflows. Features include real-time process tracking, automated notifications, role-based access control, and detailed analytics dashboards. Reduced operational bottlenecks by 40% and improved interdepartmental communication.',
+                tech: 'React · .NET Core · SQL Server · Azure'
+            },
+            { 
+                title: 'Cenzios Learning Management System', 
+                link: 'https://learner.cenzios.com/', 
+                content: 'A full-scale LMS platform for educational institutes that eliminates administrative overhead. Includes course management, student enrollment automation, progress tracking, certificate generation, and integrated payment processing. Currently serving 5,000+ active learners across multiple institutions.',
+                tech: 'Angular · Node.js · MongoDB · AWS'
+            },
+            { 
+                title: 'Realhack - Inter-University Hackathon', 
+                content: 'Conceptualized and executed Sri Lanka\'s largest 24-hour physical inter-university hackathon. Managed a team of 50+ volunteers, secured 2M+ LKR in sponsorships, coordinated with 15+ universities, and facilitated mentorship from industry leaders. Over 500 participants competed in various technology challenges.',
+                tech: 'Event Management · Sponsorship · Team Leadership'
+            }
         ];
 
         const educationData = [
-             { degree: 'Master of Business Administration (MBA)', field: 'Project Management', university: 'Cardiff Metropolitan University', date: '2024 - 2026' },
-             { degree: 'Higher National Diploma', field: 'Human Resources Management', university: 'Chartered Institute of Personnel Management (CIPM)', date: '2023 - 2024' },
-             { degree: 'Bachelor\'s degree (BSc Hons)', field: 'Computer Software Engineering', university: 'University of Kelaniya Sri Lanka', date: '2019 - 2023' }
+             { degree: 'MBA in Project Management', university: 'Cardiff Metropolitan University', date: '2024 - 2026', icon: '🎓' },
+             { degree: 'HND in HR Management', university: 'CIPM Sri Lanka', date: '2023 - 2024', icon: '📚' },
+             { degree: 'BSc (Hons) Software Engineering', university: 'University of Kelaniya', date: '2019 - 2023', icon: '💻' }
         ];
         
         const certificationsData = [
-            { title: 'Agile Scrum Master', issuer: 'Simplilearn', date: 'Sep 2024', size: 'col-span-3 md:col-span-2' },
-            { title: 'Comprehensive Guide to Software Architecture', issuer: 'Alison', date: 'Sep 2025', size: 'col-span-3 md:col-span-2' },
-            { title: 'Generative AI for Project Managers', issuer: 'PMI', date: 'Aug 2024', size: 'col-span-3 md:col-span-2' },
-            { title: 'Jira Fundamentals', issuer: 'Atlassian', date: 'Aug 2024', size: 'col-span-3 md:col-span-2' },
-            { title: 'The Business Plan', issuer: 'Alison', date: 'Oct 2025', size: 'col-span-3 md:col-span-2' },
-            { title: 'Leadership', issuer: 'SLASSCOM', date: 'Sep 2024', size: 'col-span-3 md:col-span-2' },
-            { title: 'Communication Skills', issuer: 'SLASSCOM', date: 'Sep 2024', size: 'col-span-2' },
-            { title: 'Intro to Prompt Engineering', issuer: 'Simplilearn', date: 'Sep 2024', size: 'col-span-2' },
-            { title: '.NET Fundamentals', issuer: 'Great Learning', date: 'Sep 2024', size: 'col-span-2' },
-            { title: 'Navigate Global Business Ecosystem', issuer: 'SLASSCOM', date: 'Sep 2024', size: 'col-span-2' },
-            { title: 'Emotional Intelligence', issuer: 'SLASSCOM', date: 'Sep 2024', size: 'col-span-2' },
-            { title: 'Trust Building', issuer: 'SLASSCOM', date: 'Sep 2024', size: 'col-span-2' },
-            { title: 'Basics of Disciplined Agile™', issuer: 'PMI', date: 'Aug 2024', size: 'col-span-2' },
-            { title: 'PRINCE2 Preparation', issuer: 'Alison', date: 'Aug 2024', size: 'col-span-2' },
-            { title: 'Projects in Controlled Environments', issuer: 'Alison', date: 'Aug 2024', size: 'col-span-2' },
-            { title: 'SDLC Fundamentals', issuer: 'Great Learning', date: 'Aug 2024', size: 'col-span-3' },
-            { title: 'Taming Bias: Using Wicked Problem Solving', issuer: 'PMI', date: 'Aug 2024', size: 'col-span-3' },
-            { title: 'The Basics of Scrum', issuer: 'PMI', date: 'Aug 2024', size: 'col-span-2' },
-            { title: 'Facebook Marketing', issuer: 'Simplebooks', date: 'May 2024', size: 'col-span-2' },
-            { title: 'Operating Systems - Scheduling', issuer: 'Alison', date: 'Sep 2020', size: 'col-span-2' }
+            'Agile Scrum Master', 'Software Architecture', 'Generative AI for PMs', 'JIRA Fundamentals',
+            'Business Planning', 'Leadership', 'Communication Skills', 'Prompt Engineering',
+            '.NET Fundamentals', 'Global Business', 'Emotional Intelligence', 'Trust Building',
+            'Disciplined Agile', 'PRINCE2 Prep', 'PRINCE2 Environments', 'SDLC Fundamentals',
+            'Wicked Problem Solving', 'Scrum Basics', 'Facebook Marketing', 'OS Scheduling'
         ];
 
+        // Timeline
         const timelineContainer = document.getElementById('timeline-container');
         experienceData.forEach((item, index) => {
             const timelineItem = document.createElement('div');
-            timelineItem.className = `relative md:flex items-start md:space-x-8 ${index % 2 === 0 ? 'md:flex-row-reverse md:space-x-reverse' : ''}`;
-            
-            const contentBlock = `
-                <div class="glass-card w-full p-6 cursor-pointer">
-                    <p class="text-sm font-semibold" style="color: var(--accent-purple);">${item.date}</p>
-                    <h4 class="font-bold text-lg mt-1">${item.role}</h4>
-                    <p class="text-light-secondary">${item.company}</p>
-                </div>
-            `;
-            
+            timelineItem.className = 'timeline-item glass-card';
             timelineItem.innerHTML = `
-                <div class="md:w-1/2">${contentBlock}</div>
-                <div class="hidden md:flex absolute top-6 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-dark-primary items-center justify-center">
-                    <div class="w-4 h-4 rounded-full" style="background-color: var(--accent-purple);"></div>
+                <div class="flex items-start gap-4 mb-3">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center text-white font-bold">
+                        ${index + 1}
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-bold text-cyan-400 mb-1">${item.date}</p>
+                        <h4 class="text-xl font-bold mb-1">${item.role}</h4>
+                        <p class="text-purple-400 font-semibold mb-2">${item.company}</p>
+                    </div>
                 </div>
-                <div class="md:w-1/2"></div>
+                <p class="text-gray-300 text-sm leading-relaxed">${item.details}</p>
             `;
             timelineContainer.appendChild(timelineItem);
         });
 
-        const projectsContainer = document.getElementById('projects-container');
-        projectsData.forEach((project) => {
-            const cardContent = `
-                <h4 class="text-xl font-bold">${project.title}</h4>
-                <div class="mt-2 text-light-secondary">${project.content}</div>
-                ${project.link ? `<div class="mt-4"><a href="${project.link}" target="_blank" rel="noopener noreferrer" class="link-button inline-block">View Live Site →</a></div>` : ''}
+        // Skills
+        const skillsData = [
+            { name: 'Agile Project Management', level: 95, icon: '⚡' },
+            { name: 'Solution Architecture', level: 90, icon: '🏗️' },
+            { name: 'Team Leadership', level: 92, icon: '👥' },
+            { name: 'Business Strategy', level: 85, icon: '📊' },
+            { name: 'Product Design', level: 88, icon: '🎨' },
+            { name: 'Financial Planning', level: 80, icon: '💰' }
+        ];
+
+        const skillsContainer = document.getElementById('skills-container');
+        skillsData.forEach((skill, index) => {
+            const skillCard = document.createElement('div');
+            skillCard.className = 'skill-card';
+            skillCard.innerHTML = `
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl">${skill.icon}</span>
+                        <span class="font-bold text-lg">${skill.name}</span>
+                    </div>
+                    <span class="text-2xl font-black text-purple-400">${skill.level}%</span>
+                </div>
+                <div class="relative h-2 rounded-full bg-gray-800 overflow-hidden">
+                    <div class="skill-bar h-full rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 relative" style="width: 0%;" data-width="${skill.level}%">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-40 shimmer"></div>
+                    </div>
+                </div>
             `;
-            const cardWrapper = document.createElement('div');
-            cardWrapper.className = `glass-card p-6 flex flex-col justify-between ${project.size}`;
-            cardWrapper.innerHTML = cardContent;
-            projectsContainer.appendChild(cardWrapper);
+            skillsContainer.appendChild(skillCard);
+            
+            setTimeout(() => {
+                const bar = skillCard.querySelector('.skill-bar');
+                bar.style.transition = 'width 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                bar.style.width = skill.level + '%';
+            }, 100 + (index * 100));
         });
 
+        // Projects
+        const projectsContainer = document.getElementById('projects-container');
+        projectsData.forEach((project) => {
+            const projectCard = document.createElement('div');
+            projectCard.className = 'glass-card p-8';
+            projectCard.innerHTML = `
+                <h4 class="text-2xl font-bold mb-3">${project.title}</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">${project.content}</p>
+                <div class="flex items-center gap-2 mb-4 flex-wrap">
+                    ${project.tech.split(' · ').map(tech => `<span class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30">${tech}</span>`).join('')}
+                </div>
+                ${project.link ? `<a href="${project.link}" target="_blank" rel="noopener noreferrer" class="link-button">Explore Project →</a>` : ''}
+            `;
+            projectsContainer.appendChild(projectCard);
+        });
+
+        // Education
         const educationContainer = document.getElementById('education-container');
         educationData.forEach(edu => {
             const card = document.createElement('div');
-            card.className = 'glass-card p-6 h-full';
+            card.className = 'glass-card p-6 text-center';
             card.innerHTML = `
-                <h4 class="font-bold">${edu.degree}</h4>
-                <p style="color: var(--accent-purple);">${edu.field}</p>
-                <p class="mt-1 text-light-secondary">${edu.university}</p>
-                <p class="text-sm text-light-secondary">${edu.date}</p>
+                <div class="text-5xl mb-4">${edu.icon}</div>
+                <h4 class="font-bold text-lg mb-2">${edu.degree}</h4>
+                <p class="text-purple-400 font-semibold mb-2">${edu.university}</p>
+                <p class="text-sm text-gray-400">${edu.date}</p>
             `;
             educationContainer.appendChild(card);
         });
         
+        // Certifications
         const certificationsContainer = document.getElementById('certifications-container');
         certificationsData.forEach(cert => {
             const card = document.createElement('div');
-            card.className = `glass-card p-4 flex flex-col justify-center text-center ${cert.size}`;
-            card.innerHTML = `
-                <h4 class="font-semibold">${cert.title}</h4>
-                <p class="text-sm text-light-secondary">${cert.issuer}</p>
-                <p class="text-xs mt-1 text-light-secondary">${cert.date}</p>
-            `;
+            card.className = 'glass-card p-4 text-center hover:scale-105 transition-transform';
+            card.innerHTML = `<p class="font-semibold text-sm">${cert}</p>`;
             certificationsContainer.appendChild(card);
         });
 
-        const skillsCtx = document.getElementById('skillsChart').getContext('2d');
-        const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-light-primary').trim();
-        new Chart(skillsCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Agile Project Management', 'Solution Design', 'Team & Stakeholder Management', 'Business Development', 'Software Design', 'Financial Planning'],
-                datasets: [{
-                    data: [95, 90, 92, 85, 88, 80],
-                    backgroundColor: function(context) {
-                        const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, context.chart.height);
-                        gradient.addColorStop(0, 'rgba(138, 92, 245, 0.8)');
-                        gradient.addColorStop(1, 'rgba(57, 192, 199, 0.8)');
-                        return gradient;
-                    },
-                    borderColor: 'var(--border-color)',
-                    borderWidth: 1,
-                    borderRadius: 4,
-                    barPercentage: 0.6,
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: { display: false, min: 50 },
-                    y: {
-                        ticks: { color: textColor, font: { size: 14, weight: '500' } },
-                        grid: { display: false }
-                    }
-                },
-                plugins: {
-                    legend: { display: false },
-                    tooltip: { enabled: false }
-                },
-                 animation: {
-                    duration: 1500,
-                    easing: 'easeOutCubic'
-                }
-            }
-        });
-
+        // Intersection Observer
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    const delay = index * 100;
-                    entry.target.style.transitionDelay = `${delay}ms`;
                     entry.target.classList.add('visible');
                 }
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.animated-section').forEach(section => observer.observe(section));
         
+        // Magnetic button effect
         const magneticButtons = document.querySelectorAll('.magnetic-button');
         magneticButtons.forEach(btn => {
             btn.addEventListener('mousemove', function(e) {
-                const { offsetX, offsetY, target } = e;
-                const { clientWidth, clientHeight } = target;
-                const x = (offsetX / clientWidth) * 40 - 20;
-                const y = (offsetY / clientHeight) * 40 - 20;
-                target.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
-                target.style.transition = 'transform 0.1s ease';
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
             });
 
-            btn.addEventListener('mouseleave', function(e) {
-                e.target.style.transform = 'translate(0, 0) scale(1)';
-                e.target.style.transition = 'transform 0.3s ease';
+            btn.addEventListener('mouseleave', function() {
+                btn.style.transform = 'translate(0, 0) scale(1)';
             });
         });
 
-
+        // Typewriter effect
         const roles = ["PROJECT MANAGER", "PRODUCT MANAGER", "PRODUCT OWNER", "SOLUTION DESIGNER", "AGILE LEADER"];
         let roleIndex = 0;
         let charIndex = 0;
@@ -413,7 +560,7 @@
             if (charIndex < roles[roleIndex].length) {
                 roleTextElement.textContent += roles[roleIndex].charAt(charIndex);
                 charIndex++;
-                setTimeout(typeRole, 100);
+                setTimeout(typeRole, 80);
             } else {
                 setTimeout(deleteRole, 2000);
             }
@@ -423,7 +570,7 @@
             if (charIndex > 0) {
                 roleTextElement.textContent = roles[roleIndex].substring(0, charIndex - 1);
                 charIndex--;
-                setTimeout(deleteRole, 50);
+                setTimeout(deleteRole, 40);
             } else {
                 roleIndex = (roleIndex + 1) % roles.length;
                 setTimeout(typeRole, 500);
@@ -435,4 +582,3 @@
     </script>
 </body>
 </html>
-
